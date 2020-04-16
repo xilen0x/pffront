@@ -1,0 +1,52 @@
+PASO A PASO REALIZACION DE ESTE PROYECTO
+
+1. CREAR PROYECTO // TERMINAL: npx create-react-app pffront
+
+2. INSTALAR LIBRERIAS // TERMINAL: npm i jquery popper.js bootstrap react-router-dom @fortawesome/fontawesome-free@5.1.0-9 --save
+
+************************
+OPCIONAL: HACER PUSH EN REPOSITORIO GUTHUB
+- git init
++ git add .
++ git commit -m “asd”
+- git remote add origin repository
++ git push origin master
+
+Realizar '+' en orden y repetidas veces cada vez que se quiere resubir el archivo en GitHub.
+En caso de realizar el trabajo en equipo recordar hacer realizar un pull (git pull origin master)
+************************
+
+3. Borrar archivos en scr:
+    - App.css
+    - App.js
+    - App.test.js
+    - logo.svg
+    - setupTest.js
+
+4. Crear carpetas en src:
+    - components
+    - store
+    - views
+
+5. En scr crear:
+    - layouts.js
+    
+6. En index.js:
+    - Configurar importaciones en index.js
+        - import 'bootstrap/dist/css/bootstrap.min.css';
+        - import '@fortawesome/fontawesome-free/css/all.css';
+        - import 'jquery';
+        - import 'popper.js';
+        - import 'bootstrap';
+    - Modificar la importacion de app.js (borrado en 3) y configurarlo por layouts (agregado en 5)
+    y en el cuerpo.
+
+
+7. En scr/views crear:
+    - home.js
+
+8. en 
+
+
+
+
