@@ -10,11 +10,12 @@ const Navbar = props => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav ml-auto">
-                        <a className="nav-item nav-link active" href="#">Quienes Somos<span className="sr-only">(current)</span></a>
-                        <a className="nav-item nav-link" href="#">Nuestros Tramites</a>
-                        <a className="nav-item nav-link" href="#">Precios</a>
-                        <a className="nav-item nav-link" href="#">Entrar</a>
-                        <a className="nav-item nav-link" href="#">Registrate</a>
+                        <a className="nav-item nav-link active" href="/quienessomos">Quienes Somos<span className="sr-only">(current)</span></a>
+                        <a className="nav-item nav-link" href="/blogs">Blog</a>
+                        <a className="nav-item nav-link" href="/ourwork">Nuestros Tramites</a>
+                        <a className="nav-item nav-link" href="pricing">Precios</a>
+                        <a className="nav-item nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter">Entrar</a>
+                        <a className="nav-item nav-link" href="/register">Registrate</a>
                     </div>
                 </div>
             </nav>
