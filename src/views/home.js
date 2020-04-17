@@ -28,7 +28,7 @@ const Home = props => {
     return (
         <>
             <Carousel slide={state.galery} />
-            <h1>Holaaaa</h1>
+            <h1>Holaaaa de nuevo</h1>
         </>
     )
 }
