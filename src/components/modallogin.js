@@ -1,5 +1,5 @@
 import React from 'react';
-import modallogin from '../styles/modallogin.css'
+import '../styles/modallogin.css'
 
 const ModalLogin = props => {
   return (

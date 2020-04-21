@@ -1,0 +1,10 @@
+.modal-header{
+    background-color: #444c5a;
+}
+.modal-title{
+    color: white;
+    font-size: 30px;
+}
+.modal-footer{
+    background-color: #ecf3ff;
+}
