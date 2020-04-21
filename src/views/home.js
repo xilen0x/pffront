@@ -55,7 +55,7 @@ const Home = props => {
             <Cards conte={state.blog} />
             <Coment conte={state.blog} />
             <News conte={state.blog}/>
-            
+           
         </>
     )
 }
