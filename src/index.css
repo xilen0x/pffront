@@ -23,3 +23,11 @@ body{
   background-color: rgba(100, 100, 100, 0.5);
   
 }
+.mycard {
+  border: none !important; 
+  height: 300px;
+}
+.mycard img {
+  border: none !important; 
+  height: 300px;
+}
