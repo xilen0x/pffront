@@ -12,7 +12,7 @@ const Navbar = props => {
                     <div className="navbar-nav ml-auto">
                         <a className="nav-item nav-link active" href="/quienessomos">Quienes Somos<span className="sr-only">(current)</span></a>
                         <a className="nav-item nav-link" href="/blogs">Blog</a>
-                        <a className="nav-item nav-link" href="/ourwork">Nuestros Tramites</a>
+                        <a className="nav-item nav-link" href="/dashboard">Nuestros Tramites</a>
                         <a className="nav-item nav-link" href="pricing">Precios</a>
                         <a className="nav-item nav-link" href="#" data-toggle="modal" data-target="#exampleModalCenter">Entrar</a>
                         <a className="nav-item nav-link" href="/register">Registrate</a>

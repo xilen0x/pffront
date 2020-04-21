@@ -1,5 +1,5 @@
 body{
-  padding-top: 60px;
+  padding-top: 55px;
 }
 
 
@@ -22,4 +22,19 @@ body{
 .carousel-caption{
   background-color: rgba(100, 100, 100, 0.5);
   
+}
+
+#leftnav{
+  height: 100%;
+}
+
+.progress{
+  margin: 20px auto;
+}
+.progress-bar{
+  width: 25%;
+}
+
+#todocard{
+  max-width: 18rem;
 }
