@@ -12,12 +12,15 @@ import Pricing from './views/pricing';
 import OurWork from './views/ourwork';
 import Blogs from './views/blogs';
 import BlogView from './views/blogview';
+/* import ModalRegister from './components/modalregister'; */
+
 
 const Layout = props => {
      return (
         <BrowserRouter>
             <Navbar />
             <ModalLogin />
+           {/*  <ModalRegister/> */}
             <Switch>
                 <Route exact path="/blogs" component={Blogs} />
                 <Route exact path="/blogs/:blog" component={BlogView} />
