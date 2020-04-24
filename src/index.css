@@ -1,5 +1,5 @@
 body{
-  padding-top: 60px;
+  padding-top: 55px;
 }
 
 
@@ -23,3 +23,29 @@ body{
   background-color: rgba(100, 100, 100, 0.5);
   
 }
+
+
+#leftnav{
+  height: 100%;
+}
+
+.progress{
+  margin: 20px auto;
+}
+.progress-bar{
+  width: 25%;
+}
+
+#todocard{
+  max-width: 18rem;
+}
+
+.mycard {
+  border: none !important; 
+  height: 300px;
+}
+.mycard img {
+  border: none !important; 
+  height: 300px;
+}
+

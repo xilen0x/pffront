@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Context } from '../store/appContext';
+import { useEffect } from 'react';
 
 const Navbar = props => {
+    const { store, actions } = useContext(Context);
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -13,11 +17,23 @@ const Navbar = props => {
                     <div className="navbar-nav ml-auto">
                         <Link className="nav-item nav-link" to="/quienessomos">Quienes Somos<span className="sr-only">(current)</span></Link>
                         <Link className="nav-item nav-link" to="/blogs">Blog</Link>
-                        <Link className="nav-item nav-link" to="/ourwork">Nuestros Tramites</Link>
+                        {
+                            store.currentUser !== null && (
+                                <li className="nav-item active">
+                                    <Link className="nav-item nav-link" to="/dashboard">Nuestros Trámites</Link>
+                                </li>
+                            )
+                        }
                         <Link className="nav-item nav-link" to="pricing">Precios</Link>
                         <Link className="nav-item nav-link" to="#" data-toggle="modal" data-target="#ModalLogin">Entrar</Link>
-                        {/* <Link className="nav-item nav-link" to="#" data-toggle="modal" data-target="#ModalRegister">Regístrate</Link> */}
                         <Link className="nav-item nav-link" to="/register">Registro</Link>
+                        {
+                            store.currentUser !== null && (
+                                <li className="nav-item active">
+                                    <Link className="nav-item nav-link" to="/update-profile">Mi Perfil</Link>
+                                </li>
+                            )
+                        }
                     </div>
                 </div>
             </nav>
