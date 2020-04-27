@@ -6,6 +6,7 @@ import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Register from './views/register';
 import ModalLogin from './components/modallogin';
+import Login from './components/login';
 import UpdateProfile from './views/update-profile'
 import Dashboard from './views/dashboard';
 import QuienesSomos from './views/quienessomos';
@@ -27,6 +28,7 @@ const Layout = props => {
                 <Route exact path="/quienessomos" component={QuienesSomos} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/register" component={Register} />
+                <Route exact path="/login" component={Login} />
                 <Route exact path="/update-profile" component={UpdateProfile} />
                 <Route exact path="/" component={Home} />
                 <Route component={NotFound} />

@@ -1,10 +1,22 @@
-import React from 'react';
-
+import React, { useContext, useEffect } from 'react';
+import { Context } from '../store/appContext';
+//este componente en el video de luis es llamado changePassword
 const UpdateProfile = props => {
-
-    return(
+    const { store, actions } = useContext(Context)
+    useEffect(() => {
+        if (!store.isAuthenticated) props.history.push('/login');//en caso que el usuario ingrese a este componente y no esté logeado, lo redirecciono a login.
+    }, []);
+    return (
         <>
-         <>
+            {
+                !!store.success && (
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="alert alert-success" role="alert">Éxito! - {store.success.success} </div>
+                        </div>
+                    </div>
+                )
+            }
             <div className="fcontainer">
                 <br />  <p className="text-center">Actualización de su perfil:</p>
                 <hr />
@@ -12,10 +24,10 @@ const UpdateProfile = props => {
                     <div className="col-md-6">
                         <div className="card">
                             <header className="card-header bg-dark text-white">
-                               <h4 className="card-title mt-2">Actualice sus datos:</h4>
+                                <h4 className="card-title mt-2">Actualice sus datos:</h4>
                             </header>
                             <article className="card-body">
-                                <form>
+                                <form onSubmit={e => actions.changePassword(e, props.history)}>
                                     <div className="form-row">
                                         <div className="col form-group">
                                             <label>Nombre </label>
@@ -244,8 +256,16 @@ const UpdateProfile = props => {
                                         </div>
                                     </div>
                                     <div className="form-group">
-                                        <label>Modificar contraseña</label>
-                                        <input className="form-control" type="password" />
+                                        <label>Contraseña actual</label>
+                                        <input className="form-control" type="password" id="oldpassword" name="oldpassword"
+                                            value={store.oldpassword}
+                                            onChange={actions.handleChange} />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Nueva contraseña</label>
+                                        <input className="form-control" type="password" id="password" name="password"
+                                            value={store.password}
+                                            onChange={actions.handleChange} />
                                     </div>
                                     <div className="form-group">
                                         <button type="submit" className="btn btn-primary btn-block"> Guardar</button>
@@ -260,7 +280,6 @@ const UpdateProfile = props => {
 
             </div>
 
-        </>
         </>
     )
 }

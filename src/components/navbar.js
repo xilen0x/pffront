@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 
 const Navbar = props => {
     const { store, actions } = useContext(Context);
+
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -25,8 +26,14 @@ const Navbar = props => {
                             )
                         }
                         <Link className="nav-item nav-link" to="pricing">Precios</Link>
-                        <Link className="nav-item nav-link" to="#" data-toggle="modal" data-target="#ModalLogin">Entrar</Link>
-                        <Link className="nav-item nav-link" to="/register">Registro</Link>
+                        {
+                            store.currentUser === null && (
+                                <>
+                                    <Link className="nav-item nav-link" to="#" data-toggle="modal" data-target="#ModalLogin">Entrar</Link>
+                                    <Link className="nav-item nav-link" to="/register">Registro</Link>
+                                </>
+                            )
+                        }
                         {
                             store.currentUser !== null && (
                                 <li className="nav-item active">
