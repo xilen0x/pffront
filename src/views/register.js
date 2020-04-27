@@ -32,6 +32,16 @@ const Register = props => {
                                         <input type="email" className="form-control" placeholder="" />
                                         <small className="form-text text-muted">Debe ingresar un email válido.</small>
                                     </div>
+                                    <div className="form-group">
+                                        <label className="form-check form-check-inline">
+                                            <input className="form-check-input" type="radio" name="gender" value="option1" />
+                                            <span className="form-check-label"> Hombre </span>
+                                        </label>
+                                        <label className="form-check form-check-inline">
+                                            <input className="form-check-input" type="radio" name="gender" value="option2" />
+                                            <span className="form-check-label"> Mujer</span>
+                                        </label>
+                                    </div>
                                     <div className="form-row">
                                         <div className="form-group col-md-6">
                                             <label>Ciudad</label>

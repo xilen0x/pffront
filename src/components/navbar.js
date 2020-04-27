@@ -17,6 +17,7 @@ const Navbar = props => {
                     <div className="navbar-nav ml-auto">
                         <Link className="nav-item nav-link" to="/quienessomos">Quienes Somos<span className="sr-only">(current)</span></Link>
                         <Link className="nav-item nav-link" to="/blogs">Blog</Link>
+
                         {
                             store.currentUser !== null && (
                                 <li className="nav-item active">
