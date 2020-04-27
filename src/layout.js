@@ -6,13 +6,13 @@ import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Register from './views/register';
 import ModalLogin from './components/modallogin';
+import UpdateProfile from './views/update-profile'
 import Dashboard from './views/dashboard';
 import QuienesSomos from './views/quienessomos';
 import Pricing from './views/pricing';
-
 import Blogs from './views/blogs';
 import BlogView from './views/blogview';
-/* import ModalRegister from './components/modalregister'; */
+import injectContext from './store/appContext'
 
 
 const Layout = props => {
@@ -28,6 +28,7 @@ const Layout = props => {
                 <Route exact path="/quienessomos" component={QuienesSomos} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/register" component={Register} />
+                <Route exact path="/update-profile" component={UpdateProfile} />
                 <Route exact path="/" component={Home} />
                 <Route component={NotFound} />
             </Switch>
@@ -36,4 +37,4 @@ const Layout = props => {
      )
  }
 
- export default Layout;
+ export default injectContext(Layout);

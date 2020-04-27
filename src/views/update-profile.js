@@ -1,19 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import '../styles/register.css'
 
-const Register = props => {
-    return (
+const UpdateProfile = props => {
+
+    return(
         <>
+         <>
             <div className="fcontainer">
-                <br />  <p className="text-center">Ingrese los siguientes datos para su registro:</p>
+                <br />  <p className="text-center">Actualización de su perfil:</p>
                 <hr />
                 <div className="row justify-content-center">
                     <div className="col-md-6">
                         <div className="card">
                             <header className="card-header bg-dark text-white">
-                                <Link to="" className="float-right btn btn-outline-light mt-1">Ingresar</Link>
-                                <h4 className="card-title mt-2">Registro</h4>
+                               <h4 className="card-title mt-2">Actualice sus datos:</h4>
                             </header>
                             <article className="card-body">
                                 <form>
@@ -31,16 +30,6 @@ const Register = props => {
                                         <label>Email</label>
                                         <input type="email" className="form-control" placeholder="" />
                                         <small className="form-text text-muted">Debe ingresar un email válido.</small>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="form-check form-check-inline">
-                                            <input className="form-check-input" type="radio" name="gender" value="option1" />
-                                            <span className="form-check-label"> Hombre </span>
-                                        </label>
-                                        <label className="form-check form-check-inline">
-                                            <input className="form-check-input" type="radio" name="gender" value="option2" />
-                                            <span className="form-check-label"> Mujer</span>
-                                        </label>
                                     </div>
                                     <div className="form-row">
                                         <div className="form-group col-md-6">
@@ -255,16 +244,14 @@ const Register = props => {
                                         </div>
                                     </div>
                                     <div className="form-group">
-                                        <label>Crear contraseña</label>
+                                        <label>Modificar contraseña</label>
                                         <input className="form-control" type="password" />
                                     </div>
                                     <div className="form-group">
-                                        <button type="submit" className="btn btn-primary btn-block"> Registrarse  </button>
+                                        <button type="submit" className="btn btn-primary btn-block"> Guardar</button>
                                     </div>
-                                    <small className="text-muted">By clicking the 'Sign Up' button, you confirm that you accept our <br /> Terms of use and Privacy Policy.</small>
                                 </form>
                             </article>
-                            <div className="border-top card-body text-center">Ya posse una cuenta? <Link to="">Ingresar</Link></div>
                         </div>
                     </div>
 
@@ -274,7 +261,7 @@ const Register = props => {
             </div>
 
         </>
+        </>
     )
 }
-
-export default Register;
+export default UpdateProfile;
