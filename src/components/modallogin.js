@@ -34,9 +34,9 @@ const ModalLogin = props => {
               </div>
               <div className="modal-body">
                 <div className="form-group">
-                  <label>Nombre de Usuario</label>
-                  <input type="text" className="form-control" id="username" name="username"
-                    value={store.username}
+                  <label>Ingrese su e-mail</label>
+                  <input type="text" className="form-control" id="email" name="email"
+                    value={store.email}
                     onChange={actions.handleChange} />
                 </div>
                 <div className="form-group">

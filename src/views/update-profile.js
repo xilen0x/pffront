@@ -1,5 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { Context } from '../store/appContext';
+import { Link } from 'react-router-dom';
+import ChangePass from '../components/changePass';
+
 //este componente en el video de luis es llamado changePassword
 const UpdateProfile = props => {
     const { store, actions } = useContext(Context)
@@ -12,35 +15,44 @@ const UpdateProfile = props => {
                 !!store.success && (
                     <div className="row">
                         <div className="col-md-12">
-                            <div className="alert alert-success" role="alert">Éxito! - {store.success.success} </div>
+                            <div className="alert alert-success" role="alert">{store.success.success} </div>
                         </div>
                     </div>
                 )
             }
             <div className="fcontainer">
-                <br />  <p className="text-center">Actualización de su perfil:</p>
-                <hr />
+                <br />
                 <div className="row justify-content-center">
                     <div className="col-md-6">
                         <div className="card">
-                            <header className="card-header bg-dark text-white">
+                            <header className="card-header bg-secondary text-white">
                                 <h4 className="card-title mt-2">Actualice sus datos:</h4>
                             </header>
                             <article className="card-body">
-                                <form onSubmit={e => actions.changePassword(e, props.history)}>
+                                <div className="row mr-2 mb-4">
+                                    <div className="col-sm-10"><h2>Username</h2></div>
+                                    <div className="col-sm-2"><Link to="/users" className="pull-right">
+                                        <img title="profile image" className="img-circle img-responsive img-thumbnail" src="default.jpg" /></Link>
+                                    </div>
+                                </div>
+                                <form>
                                     <div className="form-row">
                                         <div className="col form-group">
                                             <label>Nombre </label>
-                                            <input type="text" className="form-control" placeholder="" />
+                                            <input type="text" className="form-control" />
                                         </div>
                                         <div className="col form-group">
                                             <label>Apellido</label>
-                                            <input type="text" className="form-control" placeholder=" " />
+                                            <input type="text" className="form-control" />
+                                        </div>
+                                        <div className="col form-group">
+                                            <label>Rut</label>
+                                            <input type="text" className="form-control" placeholder="ej. 12345678" />
                                         </div>
                                     </div>
                                     <div className="form-group">
                                         <label>Email</label>
-                                        <input type="email" className="form-control" placeholder="" />
+                                        <input type="email" className="form-control" />
                                         <small className="form-text text-muted">Debe ingresar un email válido.</small>
                                     </div>
                                     <div className="form-row">
@@ -255,32 +267,35 @@ const UpdateProfile = props => {
                                             </select>
                                         </div>
                                     </div>
+                                    <fieldset className="form-group">
+                                        <div className="row mt-2 mb-2">
+                                            <legend className="col-form-label col-sm-2 pt-0">Género:</legend>
+                                            <div className="col-sm-10">
+                                                <div className="form-check">
+                                                    <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="hombre" />
+                                                    <label className="form-check-label" for="gridRadios1">
+                                                        Hombre</label>
+                                                </div>
+                                                <div className="form-check">
+                                                    <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="mujer" />
+                                                    <label className="form-check-label" for="gridRadios2">
+                                                        Mujer</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
                                     <div className="form-group">
-                                        <label>Contraseña actual</label>
-                                        <input className="form-control" type="password" id="oldpassword" name="oldpassword"
-                                            value={store.oldpassword}
-                                            onChange={actions.handleChange} />
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Nueva contraseña</label>
-                                        <input className="form-control" type="password" id="password" name="password"
-                                            value={store.password}
-                                            onChange={actions.handleChange} />
-                                    </div>
-                                    <div className="form-group">
-                                        <button type="submit" className="btn btn-primary btn-block"> Guardar</button>
+                                        <button type="submit" className="btn btn-primary"> Guardar</button>
                                     </div>
                                 </form>
                             </article>
                         </div>
                     </div>
-
                 </div>
-
-
             </div>
-
+                <ChangePass />
         </>
     )
 }
 export default UpdateProfile;
+

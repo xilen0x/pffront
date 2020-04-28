@@ -18,9 +18,9 @@ const Login = props => {
                     <div className="col-md-4 offset-4">
                         <form onSubmit={e => actions.login(e, props.history)}>
                             <div className="form-group">
-                                <label htmlFor="username">Nombre de usuario</label>
-                                <input type="text" className="form-control" id="username" name="username"
-                                value={store.username}
+                                <label htmlFor="email">Ingrese su e-mail</label>
+                                <input type="text" className="form-control" id="email" name="email"
+                                value={store.email}
                                 onChange={actions.handleChange}/>
                             </div>
                             <div className="form-group">

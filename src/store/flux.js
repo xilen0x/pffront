@@ -4,7 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             path: 'http://localhost:5000',
             currentUser: null,
             isAuthenticated: false,
-            username: '',
+            email: '',
             password: '',
             oldpassword: '',
             errors: null,
@@ -31,7 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 fetch(store.path + '/login', {
                     method: 'POST',
                     body: JSON.stringify({
-                        username: store.username,
+                        email: store.email,
                         password: store.password
                     }),
                     headers: {
@@ -49,10 +49,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                             setStore({
                                 currentUser: data,
                                 isAuthenticated: true,
-                                username: '',
+                                email: '',
                                 password: '',
                                 errors: null
-                                //showModal:false //no funciona tampoco para cerrar el modal.
                             })
                             sessionStorage.setItem('currentUser', JSON.stringify(data))
                             sessionStorage.setItem('isAuthenticated', true)
@@ -101,7 +100,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 setStore({
                     currentUser: null,
                     isAuthenticated: false,
-                    username: '',
+                    email: '',
                     password: '',
                     errors: null
                 })
