@@ -3,12 +3,6 @@ import { withRouter } from 'react-router-dom';
 import '../styles/modallogin.css'
 import { Context } from '../store/appContext';
 
-/*  function closeModal() {
-  $('#ModalLogin').on('shown.bs.modal', function(e) {
-      $("#ModalLogin").modal("hide");
-  });
-} */
-
 const ModalLogin = props => {
   const { store, actions } = useContext(Context);
   return (
