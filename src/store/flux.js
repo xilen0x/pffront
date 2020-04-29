@@ -6,6 +6,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             isAuthenticated: false,
             email: '',
             password: '',
+            nombre: '',
+            apellido: '',
+            rut: '',
+            ciudad: '',
+            pais: '',
             oldpassword: '',
             errors: null,
             success: null,
@@ -51,6 +56,51 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 isAuthenticated: true,
                                 email: '',
                                 password: '',
+                                errors: null
+                            })
+                            sessionStorage.setItem('currentUser', JSON.stringify(data))
+                            sessionStorage.setItem('isAuthenticated', true)
+                            history.push("/dashboard");
+                        }
+                    })
+            },
+            register: (e, history) => {
+                e.preventDefault();
+                const store = getStore();
+
+                fetch(store.path + '/register', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        nombre: store.nombre,
+                        apellido: store.apellido,
+                        email: store.email,
+                        password: store.password,
+                        rut: store.rut,
+                        ciudad: store.ciudad,
+                        pais: store.pais
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json' //estoy enviando en formato json
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.msg) {
+                            setStore({
+                                errors: data
+                            })
+                        } else {   //una vez logeado, cambio el valor del store:
+                            setStore({
+                                currentUser: data,
+                                isAuthenticated: true,
+                                nombre: '',
+                                apellido: '',
+                                email: '',
+                                password: '',
+                                rut: '',
+                                ciudad: '',
+                                pais: '',
                                 errors: null
                             })
                             sessionStorage.setItem('currentUser', JSON.stringify(data))

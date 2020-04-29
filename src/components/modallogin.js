@@ -17,7 +17,7 @@ const ModalLogin = props => {
         !!store.errors && (
           <div className="row">
             <div className="col-md-12">
-              <div className="alert alert-danger" role="alert">Error! - {store.errors.msg} </div>
+              <div className="alert alert-warning" role="alert">{store.errors.msg} </div>
             </div>
           </div>
         )
