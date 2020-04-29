@@ -17,7 +17,7 @@ const Register = props => {
                     <div className="col-md-6">
                         <div className="card">
                             <header className="card-header bg-secondary text-white">
-                                <h4 className="card-title mt-2">Registro</h4>
+                                <h4 className="card-title mt-2">Regístrate ahora</h4>
                             </header>
                             <article className="card-body">
                                 <form onSubmit={e => actions.register(e, props.history)}>
