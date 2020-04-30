@@ -21,6 +21,7 @@ const Layout = props => {
         <BrowserRouter>
             <Navbar />
             <ModalLogin />
+           {/*  <ModalRegister/> */}
             <Switch>
                 <Route exact path="/blogs" component={Blogs} />
                 <Route exact path="/blogs/:blog" component={BlogView} />
