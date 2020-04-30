@@ -17,6 +17,7 @@ const injectContext = PassedComponent => {
         componentDidMount() {
             this.state.actions.getTramits('http://localhost:5000/tramits');
             this.state.actions.getTasks('http://localhost:5000/tasks');
+            this.state.actions.isAuthenticated();
         }
         render() {
             return (
