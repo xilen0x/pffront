@@ -109,7 +109,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         }
                     })
             },
-           /*  updateProfile: (e, history) => {
+            updateProfile: (e, history) => {
                 e.preventDefault();
                 const store = getStore();
 
@@ -153,7 +153,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                             history.push("/dashboard");
                         }
                     })
-            } */
+            },
             changePassword: (e, history) => {
                 e.preventDefault();
                 const store = getStore();
