@@ -7,7 +7,6 @@ import Footer from './components/footer';
 import Register from './views/register';
 import ModalLogin from './components/modallogin';
 import Login from './components/login';
-import ChangePass from './components/changePass';
 import UpdateProfile from './views/update-profile'
 import Dashboard from './views/dashboard';
 import QuienesSomos from './views/quienessomos';

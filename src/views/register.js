@@ -7,7 +7,6 @@ import Select from '@material-ui/core/Select';
 
 const Register = props => {
     const { store, actions } = useContext(Context)
-    //useEffect(() => {}, []);
     return (
         <>
             <div className="fcontainer">
@@ -25,6 +24,11 @@ const Register = props => {
                                         <div className="col-md-8 form-group">
                                             <label>Nombre </label>
                                             <input type="text" className="form-control" id="nombre" name="nombre" value={store.nombre} onChange={actions.handleChange} />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="avatar">Avatar</label>
+                                            <input type="file" className="form-control" id="avatar" name="avatar" 
+                                            onChange={actions.handleChangeFile} />
                                         </div>
                                     </div>
                                     <div className="form-row">
