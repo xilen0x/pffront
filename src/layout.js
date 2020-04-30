@@ -12,6 +12,7 @@ import Pricing from './views/pricing';
 
 import Blogs from './views/blogs';
 import BlogView from './views/blogview';
+import injectContext from './store/appContext';
 /* import ModalRegister from './components/modalregister'; */
 
 
@@ -36,4 +37,4 @@ const Layout = props => {
      )
  }
 
- export default Layout;
+ export default injectContext(Layout);

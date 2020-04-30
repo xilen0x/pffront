@@ -10,17 +10,21 @@ const Cards = props => {
                         props.conte.map((blog, i) => {
                             const img = blog.title.split(" ").join("-").toLowerCase() + ".jpg";
                             return (
-                                <div className=" col-md-4 mt-5" key={i}>
-                                    <div className="card text-dark">
-                                        <img src={blog.image} className="card-img-top" alt="..." />
-                                        <div className="card-body">
-                                            <h5 className="card-title">{blog.title}</h5>
-                                            <p className="card-desciption">{blog.description}</p>
-                                            {/* <p className="card-text">{people.opening_crawl}</p>*/}
-                                            <Link to={"/blogs/" + blog.name} className="btn btn-primary float-right col-3">description</Link>
+                                
+                                    <div className=" col-md-4 mt-5" key={i}>
+                                        <Link to={"/blogs/" + blog.name} className="btn">
+                                        <div className="card text-white bg-dark">
+                                            <img src={blog.image} className="card-img-top" alt="..." />
+                                            <div className="card-body">
+                                                <h5 className="card-title text-white">{blog.title}</h5>
+                                                <p className="card-desciption">{blog.requsitos}</p>
+                                                {/* <p className="card-text">{people.opening_crawl}</p>*/}
+
+                                            </div>
                                         </div>
+                                        </Link>
                                     </div>
-                                </div>
+                                
                             )
                         })
                         : (

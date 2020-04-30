@@ -48,4 +48,13 @@ body{
   border: none !important; 
   height: 300px;
 }
+#link {
+  height: 100px;
+}
+#imagen {
+  height: 500px;
+}
+#ictemps {
+  height: 100px;
+}
 
