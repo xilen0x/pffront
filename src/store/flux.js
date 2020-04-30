@@ -109,7 +109,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         }
                     })
             },
-            updateProfile: (e, history) => {
+           /*  updateProfile: (e, history) => {
                 e.preventDefault();
                 const store = getStore();
 
@@ -125,7 +125,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         pais: store.pais
                     }),
                     headers: {
-                        'Content-Type': 'application/json' //estoy enviando en formato json
+                        'Content-Type': 'application/json'
                     }
                 })
                     .then(resp => resp.json())
@@ -135,7 +135,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                             setStore({
                                 errors: data
                             })
-                        } else {   //una vez logeado, cambio el valor del store:
+                        } else {   //una vez logeado, actualizo el store:
                             setStore({
                                 currentUser: data,
                                 isAuthenticated: true,
@@ -153,7 +153,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                             history.push("/dashboard");
                         }
                     })
-            },
+            } */
             changePassword: (e, history) => {
                 e.preventDefault();
                 const store = getStore();
