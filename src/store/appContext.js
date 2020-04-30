@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import getState from './flux';
 
 export const Context = React.createContext(null);
@@ -13,6 +13,10 @@ const injectContext = PassedComponent => {
                 actions: {...state.actions}
             })
         }))
+
+        useEffect(() => {
+            state.actions.isAuthenticated();
+        }, [] )
 
         return (
             <Context.Provider value={state}>
