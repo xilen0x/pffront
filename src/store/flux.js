@@ -12,6 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             ciudad: '',
             pais: '',
             oldpassword: '',
+            avatar: null,
             errors: null,
             success: null,
         },
@@ -19,6 +20,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             handleChange: e => {
                 setStore({
                     [e.target.name]: e.target.value
+                })
+            },
+            handleChangeFile: e => {
+                setStore({
+                    [e.target.name]: e.target.files[0]
                 })
             },
             isAuthenticated: () => {
@@ -67,6 +73,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             register: (e, history) => {
                 e.preventDefault();
                 const store = getStore();
+
+                let formData = new FormData();
+                formData.append("email", store.email);
+                formData.append("password", store.password);
+                formData.append("avatar", store.avatar);
 
                 fetch(store.path + '/register', {
                     method: 'POST',
