@@ -27,17 +27,43 @@ body{
 
 #leftnav{
   height: 100%;
+  position: fixed;
+  display: unset;
+}
+
+form{
+  margin: 50px auto;
+}
+#contentdash{
+  margin: 0px auto 40px;
+}
+
+#uploadtitle{
+  width: 100%;
+  text-align: center;
+  margin: 40px auto;
+}
+
+#scrollablecorps{
+  max-height: 400px;
+}
+
+#icons{
+  color: rgb(52, 58, 63)
 }
 
 .progress{
   margin: 20px auto;
+  width: 90%;
 }
+
 .progress-bar{
   width: 25%;
 }
 
 #todocard{
   max-width: 18rem;
+  max-height: 250px;
 }
 
 .mycard {
