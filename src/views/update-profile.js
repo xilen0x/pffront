@@ -1,67 +1,69 @@
 import React, { useContext, useEffect } from 'react';
 import { Context } from '../store/appContext';
 import { Link } from 'react-router-dom';
-import '../styles/register.css'
+import ChangePass from '../components/changePass';
 import Select from '@material-ui/core/Select';
 
-
-const Register = props => {
+//este componente en el video de luis es llamado changePassword
+const UpdateProfile = props => {
     const { store, actions } = useContext(Context)
+    useEffect(() => {
+        if (!store.isAuthenticated) props.history.push('/login');//en caso que el usuario ingrese a este componente y no esté logeado, lo redirecciono a login.
+    }, []);
     return (
         <>
+            {
+                !!store.success && (
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="alert alert-success" role="alert">{store.success.success} </div>
+                        </div>
+                    </div>
+                )
+            }
             <div className="fcontainer">
-                <br />  <p className="text-center">Bienvenido!, Ingrese los siguientes datos para su registro:</p>
-                <hr />
+                <br />
                 <div className="row justify-content-center">
                     <div className="col-md-6">
                         <div className="card">
                             <header className="card-header bg-secondary text-white">
-                                <h4 className="card-title mt-2">Regístrate ahora</h4>
+                                <h4 className="card-title mt-2">Actualice sus datos:</h4>
                             </header>
                             <article className="card-body">
-                                <form onSubmit={e => actions.register(e, props.history)}>
+                                <div className="row mr-2 mb-4">
+                                    <div className="col-sm-2">
+                                        <Link to="#" className="pull-right">
+                                        <img title="profile image" className="img-circle img-responsive img-thumbnail" src="default.jpg" />
+                                        </Link>
+                                    </div>
+                                </div>
+                                <form onChange={e => actions.handleChange(e, props.history)}>
                                     <div className="form-row">
-                                        <div className="col-md-8 form-group">
+                                        <div className="col form-group">
                                             <label>Nombre </label>
-                                            <input type="text" className="form-control" id="nombre" name="nombre" value={store.nombre} onChange={actions.handleChange} />
+                                            <input type="text" className="form-control" name="nombre" value={store.nombre} onChange={actions.handleChange}/>
                                         </div>
-                                        <div className="form-group">
-                                            <label htmlFor="avatar">Avatar</label>
-                                            <input type="file" className="form-control" id="avatar" name="avatar" 
-                                            onChange={actions.handleChangeFile} />
-                                        </div>
-                                    </div>
-                                    <div className="form-row">
-                                        <div className="col-md-8 form-group">
+                                        <div className="col form-group">
                                             <label>Apellido</label>
-                                            <input type="text" className="form-control" id="apellido" name="apellido" value={store.apellido} onChange={actions.handleChange} />
+                                            <input type="text" className="form-control" />
                                         </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-4 form-group">
+                                        <div className="col form-group">
                                             <label>Rut</label>
-                                            <input type="text" className="form-control" id="rut" name="rut" value={store.rut} onChange={actions.handleChange} placeholder="ej. 12345678" />
+                                            <input type="text" className="form-control" placeholder="ej. 12345678" />
                                         </div>
                                     </div>
-
                                     <div className="form-group">
                                         <label>Email</label>
-                                        <input type="email" className="form-control" id="email" name="email" value={store.email} onChange={actions.handleChange} />
+                                        <input type="email" className="form-control" />
                                         <small className="form-text text-muted">Debe ingresar un email válido.</small>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="form-check form-check-inline">
-                                            <input className="form-check-input" type="radio" name="gender" value="option1" />
-                                            <span className="form-check-label"> Hombre </span>
-                                        </label>
-                                        <label className="form-check form-check-inline">
-                                            <input className="form-check-input" type="radio" name="gender" value="option2" />
-                                            <span className="form-check-label"> Mujer</span>
-                                        </label>
                                     </div>
                                     <div className="form-row">
                                         <div className="form-group col-md-6">
-                                            <label>País</label><br></br>
+                                            <label>Ciudad</label>
+                                            <input type="text" className="form-control" />
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            <label>País</label>
                                             <Select id="pais" name="pais" value={store.pais} onChange={actions.handleChange} >
                                                 <option value=""></option>
                                                 <option value="AF">Afghanistan</option>
@@ -315,32 +317,36 @@ const Register = props => {
                                                 <option value="ZW">Zimbabwe</option>
                                             </Select>
                                         </div>
-                                        <div className="form-group col-md-6">
-                                            <label>Ciudad</label>
-                                            <input type="text" className="form-control" id="ciudad" name="ciudad" value={store.ciudad} onChange={actions.handleChange} />
+                                    </div>
+                                    <fieldset className="form-group">
+                                        <div className="row mt-2 mb-2">
+                                            <legend className="col-form-label col-sm-2 pt-0">Género:</legend>
+                                            <div className="col-sm-10">
+                                                <div className="form-check">
+                                                    <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="hombre" />
+                                                    <label className="form-check-label" for="gridRadios1">
+                                                        Hombre</label>
+                                                </div>
+                                                <div className="form-check">
+                                                    <input className="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="mujer" />
+                                                    <label className="form-check-label" for="gridRadios2">
+                                                        Mujer</label>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </fieldset>
                                     <div className="form-group">
-                                        <label>Crear contraseña</label>
-                                        <input type="password" className="form-control" id="password" name="password" value={store.password} onChange={actions.handleChange} />
+                                        <button type="submit" className="btn btn-primary"> Guardar</button>
                                     </div>
-                                    <div className="form-group">
-                                        <button type="submit" className="btn btn-primary btn-block"> Registrarse </button>
-                                    </div>
-                                    <small className="text-muted">Al hacer clic en el botón 'Registrarse', confirma que acepta nuestros términos de uso y política de privacidad.</small>
                                 </form>
                             </article>
-                            <div className="border-top card-body text-center">Ya posse una cuenta? <Link to="/login">Ingresar</Link></div>
                         </div>
                     </div>
-
                 </div>
-
-
             </div>
-
+                <ChangePass />
         </>
     )
 }
+export default UpdateProfile;
 
-export default Register;
