@@ -6,13 +6,13 @@ const getState = ({ getStore, getActions, setStore }) => {
             isAuthenticated: false,
             email: '',
             password: '',
+            avatar: null,
             nombre: '',
             apellido: '',
             rut: '',
             ciudad: '',
             pais: '',
             oldpassword: '',
-            avatar: null,
             errors: null,
             success: null,
         },
@@ -73,26 +73,20 @@ const getState = ({ getStore, getActions, setStore }) => {
             register: (e, history) => {
                 e.preventDefault();
                 const store = getStore();
-
+                
                 let formData = new FormData();
+                formData.append("nombre", store.nombre);
+                formData.append("apellido", store.apellido);
                 formData.append("email", store.email);
                 formData.append("password", store.password);
+                formData.append("rut", store.rut);
+                formData.append("ciudad", store.ciudad);
+                formData.append("pais", store.pais);
                 formData.append("avatar", store.avatar);
 
                 fetch(store.path + '/register', {
                     method: 'POST',
-                    body: JSON.stringify({
-                        nombre: store.nombre,
-                        apellido: store.apellido,
-                        email: store.email,
-                        password: store.password,
-                        rut: store.rut,
-                        ciudad: store.ciudad,
-                        pais: store.pais
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json' //estoy enviando en formato json
-                    }
+                    body: formData
                 })
                     .then(resp => resp.json())
                     .then(data => {
@@ -112,6 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 rut: '',
                                 ciudad: '',
                                 pais: '',
+                                avatar: null,
                                 errors: null
                             })
                             sessionStorage.setItem('currentUser', JSON.stringify(data))

@@ -31,17 +31,17 @@ const UpdateProfile = props => {
                             </header>
                             <article className="card-body">
                                 <div className="row mr-2 mb-4">
-                                    <div className="col-sm-2">
-                                        <Link to="#" className="pull-right">
-                                        <img title="profile image" className="img-circle img-responsive img-thumbnail" src="default.jpg" />
-                                        </Link>
-                                    </div>
+                                    {
+                                        !!store.currentUser && (
+                                            <img src={store.path + "/users/avatar/" + store.currentUser.user.avatar} alt="" width="100" height="100"></img>
+                                        )
+                                    }
                                 </div>
                                 <form onChange={e => actions.handleChange(e, props.history)}>
                                     <div className="form-row">
                                         <div className="col form-group">
                                             <label>Nombre </label>
-                                            <input type="text" className="form-control" name="nombre" value={store.nombre} onChange={actions.handleChange}/>
+                                            <input type="text" className="form-control" name="nombre" value={store.nombre} onChange={actions.handleChange} />
                                         </div>
                                         <div className="col form-group">
                                             <label>Apellido</label>
@@ -344,7 +344,7 @@ const UpdateProfile = props => {
                     </div>
                 </div>
             </div>
-                <ChangePass />
+            <ChangePass />
         </>
     )
 }
