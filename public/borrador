@@ -1,0 +1,156 @@
+TODOCARDS
+
+import React, { useContext, useEffect } from 'react';
+import { Context } from "../../store/appContext";
+import { Link } from 'react-router-dom';
+
+const TodoCards = props => {
+    const { store, actions } = useContext(Context);
+    console.log(store.tramits)
+    useEffect(() => {
+        if (props.match.params.id !== null){
+            actions.getTramits(props.match.params.id)
+        }
+    },[props.match.params.id])
+    // const movie = props.match.params.movies;
+    return (
+        <>
+            <div className="row d-flex justify-content-center">
+                <div className="card text-white bg-danger mb-3 mx-3 col-md-4 col-xs-12" id="todocard">
+                    <div className="card-header">Tareas por hacer?</div>
+                    <div className="card-body overflow-auto">
+                        <div className="list-group">
+
+                            {
+                                store.tramits != null ?
+                                    (
+                                        store.tramits.map((tramit, i) => {
+                                            return (
+                                                <div className="dropdown">
+                                                    <button className="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        {tramit.tasks_details.task01}
+                                                    </button>
+                                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <Link className="dropdown-item" to="#">Realizando</Link>
+                                                        <Link className="dropdown-item" to="#">Realizada</Link>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    )
+                                    : (
+                                        <div className="text-center" id="undefined">
+                                            <div className="spinner-grow text-light" role="status">
+                                            </div>
+                                        </div>
+                                    )
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div className="card text-white bg-success mb-3 mx-3 col-md-4 " id="todocard">
+                    <div className="card-header">Tareas terminados!</div>
+                    <div className="card-body overflow-auto">
+                        <div className="list-group">
+                            <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
+                            <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
+                            <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
+                            <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
+                            <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
+                            <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
+                            <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
+                            <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default TodoCards;
+
+
+
+
+
+
+
+
+
+FLUX
+
+
+
+const apiUrl = "http://localhost:5000/tramits"
+const getState = ({ getStore, getActions, setStore }) => {
+  return {
+    store: {
+      tramits: [],
+      tasks: [],
+    },
+    actions: {
+
+      getTramits: (id) => {
+        fetch( `${apiUrl}/${id}`, {
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            setStore({
+              tramits: data
+            });
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
+
+      getTasks: url => {
+        fetch( url, {
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            setStore({
+              tasks: data
+            });
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
+
+      // addTramit: data => {
+			// 	const store = getStore();
+			// 	fetch( url, {
+			// 		method: "POST",
+			// 		body: JSON.stringify(data),
+			// 		headers: {
+			// 			"Content-Type": "application/json"
+			// 		}
+			// 	})
+			// 		.then(resp => resp.json())
+			// 		.then(data => {
+			// 			getActions().loadContactByAgenda();
+			// 		});
+			// },
+    }
+  }
+}
+
+export default getState;
+
+
+
+
+
+
+
+

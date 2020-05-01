@@ -1,31 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import getState from './flux';
-
 export const Context = React.createContext(null);
-
 const injectContext = PassedComponent => {
-    const StoreWrapper = props => {
-        const [state, setState] = useState(getState({
-            getStore: () => state.store,
-            getActions: () => state.actions,
-            setStore: updateStore => setState({
-                store: Object.assign(state.store, updateStore),
-                actions: {...state.actions}
+    class StoreWrapper extends Component {
+        constructor(props) {
+            super(props);
+            this.state = getState({
+                getStore: () => this.state.store,
+                getActions: () => this.state.actions,
+                setStore: updateStore => this.setState({
+                    store: Object.assign(this.state.store, updateStore),
+                    actions: { ...this.state.actions }
+                })
             })
-        }))
-
-        useEffect(() => {
-            state.actions.isAuthenticated();
-        }, [] )
-
-        return (
-            <Context.Provider value={state}>
-                <PassedComponent {...props} />
-            </Context.Provider>
-        )
+        }
+        componentDidMount() {
+            this.state.actions.getTramits('http://localhost:5000/tramits');
+            this.state.actions.getTasks('http://localhost:5000/tasks');
+            this.state.actions.isAuthenticated();
+        }
+        render() {
+            return (
+                <Context.Provider value={this.state}>
+                    <PassedComponent {...this.props} />
+                </Context.Provider>
+            )
+        }
     }
-
     return StoreWrapper;
 }
-
 export default injectContext;

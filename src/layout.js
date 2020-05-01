@@ -13,7 +13,13 @@ import QuienesSomos from './views/quienessomos';
 import Pricing from './views/pricing';
 import Blogs from './views/blogs';
 import BlogView from './views/blogview';
-import injectContext from './store/appContext'
+import AdminUpBlog from './views/dashviews/adminupblog';
+import AdminUpNew from './components/dashcompts/adminupnew';
+import injectContext from './store/appContext';
+import TodoCards from './components/dashcompts/todocards';
+import AdminHome from './views/dashviews/adminhome';
+import AdminUpTramit from './views/dashviews/todotramite';
+
 
 
 const Layout = props => {
@@ -21,8 +27,12 @@ const Layout = props => {
         <BrowserRouter>
             <Navbar />
             <ModalLogin />
-           {/*  <ModalRegister/> */}
             <Switch>
+                <Route exact path="/dashboard/adminupnew" component={AdminUpNew} />
+                <Route exact path="/dashboard/adminupblog" component={AdminUpBlog} />
+                <Route exact path="/dashboard/adminuptramit" component={AdminUpTramit} />   
+                <Route exact path="/dashboard/adminhome" component={AdminHome} />
+                <Route exact path="/dashboard/:id" component={TodoCards} />       
                 <Route exact path="/blogs" component={Blogs} />
                 <Route exact path="/blogs/:blog" component={BlogView} />
                 <Route exact path="/pricing" component={Pricing} />
@@ -39,4 +49,4 @@ const Layout = props => {
      )
  }
 
- export default injectContext(Layout);
+ export default injectContext(Layout)
