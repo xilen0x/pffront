@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             isAuthenticated: false,
             email: '',
             password: '',
+            avatar: null,
             nombre: '',
             apellido: '',
             rut: '',
@@ -19,6 +20,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             handleChange: e => {
                 setStore({
                     [e.target.name]: e.target.value
+                })
+            },
+            handleChangeFile: e => {
+                setStore({
+                    [e.target.name]: e.target.files[0]
                 })
             },
             isAuthenticated: () => {
@@ -67,9 +73,54 @@ const getState = ({ getStore, getActions, setStore }) => {
             register: (e, history) => {
                 e.preventDefault();
                 const store = getStore();
+                
+                let formData = new FormData();
+                formData.append("nombre", store.nombre);
+                formData.append("apellido", store.apellido);
+                formData.append("email", store.email);
+                formData.append("password", store.password);
+                formData.append("rut", store.rut);
+                formData.append("ciudad", store.ciudad);
+                formData.append("pais", store.pais);
+                formData.append("avatar", store.avatar);
 
                 fetch(store.path + '/register', {
                     method: 'POST',
+                    body: formData
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.msg) {
+                            setStore({
+                                errors: data
+                            })
+                        } else {   //una vez logeado, cambio el valor del store:
+                            setStore({
+                                currentUser: data,
+                                isAuthenticated: true,
+                                nombre: '',
+                                apellido: '',
+                                email: '',
+                                password: '',
+                                rut: '',
+                                ciudad: '',
+                                pais: '',
+                                avatar: null,
+                                errors: null
+                            })
+                            sessionStorage.setItem('currentUser', JSON.stringify(data))
+                            sessionStorage.setItem('isAuthenticated', true)
+                            history.push("/dashboard");
+                        }
+                    })
+            },
+            updateProfile: (e, history) => {
+                e.preventDefault();
+                const store = getStore();
+
+                fetch(store.path + '/update-profile/'+ store.currentUser.user.id, {
+                    method: 'PUT',
                     body: JSON.stringify({
                         nombre: store.nombre,
                         apellido: store.apellido,
@@ -80,7 +131,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         pais: store.pais
                     }),
                     headers: {
-                        'Content-Type': 'application/json' //estoy enviando en formato json
+                        'Content-Type': 'application/json'
                     }
                 })
                     .then(resp => resp.json())
@@ -90,7 +141,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                             setStore({
                                 errors: data
                             })
-                        } else {   //una vez logeado, cambio el valor del store:
+                        } else {   //una vez logeado, actualizo el store:
                             setStore({
                                 currentUser: data,
                                 isAuthenticated: true,
