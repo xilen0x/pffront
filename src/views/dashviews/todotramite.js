@@ -9,7 +9,7 @@ const AdminUpTramit = props => {
     const { store, actions } = useContext(Context);
     return (
         <>
-            <div className="row">
+            <div className="row" id="dashbody">
                 <div className="col-md-3">
                     <VertNavbar />
                 </div>

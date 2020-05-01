@@ -1,6 +1,6 @@
-body{
+/* body{
   padding-top: 55px;
-}
+} */
 
 
 #carouselContainer{
@@ -24,11 +24,15 @@ body{
   
 }
 
+/* #dashbody{
+  margin-top: -49px;
+} */
 
 #leftnav{
   height: 100%;
   position: fixed;
   display: unset;
+
 }
 
 form{

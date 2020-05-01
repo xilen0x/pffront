@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const AdminUpNew = props => {
     return (
         <>
-            <div className="row">
+            <div className="row" id="dashbody">
                 <div className="col-md-3">
                     <VertNavbar />
                 </div>

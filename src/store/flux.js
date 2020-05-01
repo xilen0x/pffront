@@ -12,6 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ciudad: '',
       pais: '',
       oldpassword: '',
+      avatar: null,
       errors: null,
       success: null,
       tramits: null,
@@ -53,9 +54,30 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(error)
           })
       },
+
+      // addTramit: data => {
+      // 	const store = getStore();
+      // 	fetch( url, {
+      // 		method: "POST",
+      // 		body: JSON.stringify(data),
+      // 		headers: {
+      // 			"Content-Type": "application/json"
+      // 		}
+      // 	})
+      // 		.then(resp => resp.json())
+      // 		.then(data => {
+      // 			getActions().loadContactByAgenda();
+      // 		});
+      // },
+
       handleChange: e => {
         setStore({
           [e.target.name]: e.target.value
+        })
+      },
+      handleChangeFile: e => {
+        setStore({
+          [e.target.name]: e.target.files[0]
         })
       },
       isAuthenticated: () => {
@@ -104,6 +126,11 @@ const getState = ({ getStore, getActions, setStore }) => {
       register: (e, history) => {
         e.preventDefault();
         const store = getStore();
+
+        let formData = new FormData();
+        formData.append("email", store.email);
+        formData.append("password", store.password);
+        formData.append("avatar", store.avatar);
 
         fetch(store.path + '/register', {
           method: 'POST',
@@ -162,7 +189,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             pais: store.pais
           }),
           headers: {
-            'Content-Type': 'application/json' //estoy enviando en formato json
+            'Content-Type': 'application/json'
           }
         })
           .then(resp => resp.json())
@@ -172,7 +199,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               setStore({
                 errors: data
               })
-            } else {   //una vez logeado, cambio el valor del store:
+            } else {   //una vez logeado, actualizo el store:
               setStore({
                 currentUser: data,
                 isAuthenticated: true,
