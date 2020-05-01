@@ -17,8 +17,69 @@ const getState = ({ getStore, getActions, setStore }) => {
       success: null,
       tramits: null,
       tasks: null,
+      blod: null,
+      comentary: null,
+      temperatura: null,
     },
     actions: {
+      getBlogs: url => {
+        fetch(url, {
+          method: 'GET',
+
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data)
+            setStore({
+              blog: data
+            })
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
+      getTemperatura: url => {
+        fetch(url, {
+          method: 'GET',
+
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data)
+            setStore({
+              temperatura: data
+            })
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
+      getComentary: url => {
+        fetch(url, {
+          method: 'GET',
+
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data)
+            setStore({
+              comentary: data
+            })
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
+
       getTramits: url => {
         fetch(url, {
           method: 'GET',
@@ -269,5 +330,6 @@ const getState = ({ getStore, getActions, setStore }) => {
     }
   }
 }
+
 
 export default getState;
