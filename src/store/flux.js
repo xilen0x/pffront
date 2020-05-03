@@ -6,17 +6,131 @@ const getState = ({ getStore, getActions, setStore }) => {
             isAuthenticated: false,
             email: '',
             password: '',
-            avatar: null,
             nombre: '',
             apellido: '',
             rut: '',
             ciudad: '',
             pais: '',
             oldpassword: '',
+            avatar: null,
             errors: null,
             success: null,
+            tramits: null,
+            tasks: null,
+            blod: null,
+            comentary: null,
+            temperatura: null,
         },
         actions: {
+            getBlogs: url => {
+                fetch(url, {
+                    method: 'GET',
+
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.log(data)
+                        setStore({
+                            blog: data
+                        })
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            getTemperatura: url => {
+                fetch(url, {
+                    method: 'GET',
+
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.log(data)
+                        setStore({
+                            temperatura: data
+                        })
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            getComentary: url => {
+                fetch(url, {
+                    method: 'GET',
+
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.log(data)
+                        setStore({
+                            comentary: data
+                        })
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+
+            getTramits: url => {
+                fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        setStore({
+                            tramits: data
+                        });
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+
+            getTasks: url => {
+                fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        setStore({
+                            tasks: data
+                        });
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+
+            // addTramit: data => {
+            // 	const store = getStore();
+            // 	fetch( url, {
+            // 		method: "POST",
+            // 		body: JSON.stringify(data),
+            // 		headers: {
+            // 			"Content-Type": "application/json"
+            // 		}
+            // 	})
+            // 		.then(resp => resp.json())
+            // 		.then(data => {
+            // 			getActions().loadContactByAgenda();
+            // 		});
+            // },
+
             handleChange: e => {
                 setStore({
                     [e.target.name]: e.target.value
@@ -73,7 +187,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             register: (e, history) => {
                 e.preventDefault();
                 const store = getStore();
-                
+
                 let formData = new FormData();
                 formData.append("nombre", store.nombre);
                 formData.append("apellido", store.apellido);
@@ -106,7 +220,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 rut: '',
                                 ciudad: '',
                                 pais: '',
-                                avatar: null,
                                 errors: null
                             })
                             sessionStorage.setItem('currentUser', JSON.stringify(data))
@@ -119,8 +232,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 e.preventDefault();
                 const store = getStore();
 
-                fetch(store.path + '/update-profile/'+ store.currentUser.user.id, {
-                    method: 'PUT',
+                fetch(store.path + '/update-profile/' + store.currentUser.user.id, {
+                    method: 'GET',
                     body: JSON.stringify({
                         nombre: store.nombre,
                         apellido: store.apellido,
@@ -154,9 +267,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 pais: '',
                                 errors: null
                             })
-                            sessionStorage.setItem('currentUser', JSON.stringify(data))
-                            sessionStorage.setItem('isAuthenticated', true)
-                            history.push("/dashboard");
                         }
                     })
             },
@@ -211,5 +321,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
     }
 }
+
 
 export default getState;

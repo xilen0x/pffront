@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context } from "../../store/appContext";
+import { Link } from 'react-router-dom';
+
+
 
 const VertNavbar = props => {
+    const { store, actions } = useContext(Context);
+    // const tram = props.match.params.id;
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark" id="leftnav">
@@ -8,80 +14,90 @@ const VertNavbar = props => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <ul className="navbar-nav mr-auto mt-2 mt-lg-0 flex-column">
-
-                        <div className="btn-group">
-                            <button type="button" className="btn btn-dark">Un texto mas largo pa ver que pasa</button>
-                            <button type="button" className="btn btn-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span className="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div className="dropdown-menu">
-                                <a className="dropdown-item" href="#">Action</a>
-                                <a className="dropdown-item" href="#">Another action</a>
-                                <a className="dropdown-item" href="#">Something else here</a>
+                    <ul className="navbar-nav flex-column">
+                        <li className="nav-item">
+                            <div className="btn-group">
+                                <button type="button" className="btn btn-dark"><Link className="text-white bg-dark" to="/dashboard/adminhome">Administración General (Admin)</Link></button>
+                                <button type="button" className="btn btn-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span className="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div className="dropdown-menu">
+                                    <Link className="dropdown-item" to="/dashboard/adminupblog">Administración de Blogs</Link>
+                                    <Link className="dropdown-item" to="/dashboard/adminupnew">Administración de Noticias</Link>
+                                    <Link className="dropdown-item" to="/dashboard/adminuptramit">Administración de Trámites</Link>
+                                </div>
                             </div>
-                        </div>
-                        <div className="btn-group">
-                            <button type="button" className="btn btn-dark">Un texto mas largo pa ver que pasa</button>
-                            <button type="button" className="btn btn-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span className="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div className="dropdown-menu">
-                                <a className="dropdown-item" href="#">Action</a>
-                                <a className="dropdown-item" href="#">Another action</a>
-                                <a className="dropdown-item" href="#">Something else here</a>
+                        </li>
+                        {
+                            !!store.tramits ?
+                                store.tramits.map((tramit, i) => {
+                                    // if (JSON.stringify(tramit.tramit) === JSON.stringify(tram)) {
+                                    return (
+                                        <>
+                                            <li className="nav-item">
+                                                <div className="btn-group">
+                                                    <button type="button" className="btn btn-dark"><Link className="text-white bg-dark" to={tramit.tramit}>{tramit.tramit}</Link></button>
+                                                    <button type="button" className="btn btn-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <span className="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <div className="dropdown-menu">
+                                                        <Link className="dropdown-item" to="/dashboard/#infointroduccion">Introducción</Link>
+                                                        <Link className="dropdown-item" to="/dashboard/#infoinformacion">Información</Link>
+                                                        <Link className="dropdown-item" to="/dashboard/#infoconclusiones">Conclusiones</Link>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </>
+                                    )
+                                })
+                                : (
+                                    <div className="text-center" id="undefined">
+                                        <div className="spinner-grow text-light" role="status">
+                                        </div>
+                                    </div>
+                                )
+                        }
+                        {/* <li className="nav-item">
+                            <div className="btn-group">
+                                <button type="button" className="btn btn-dark">Renovar CI</button>
+                                <button type="button" className="btn btn-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span className="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div className="dropdown-menu">
+                                    <a className="dropdown-item" href="#">Action</a>
+                                    <a className="dropdown-item" href="#">Another action</a>
+                                    <a className="dropdown-item" href="#">Something else here</a>
+                                </div>
                             </div>
-                        </div>
-                        <div className="btn-group">
-                            <button type="button" className="btn btn-dark">Un texto mas largo pa ver que pasa</button>
-                            <button type="button" className="btn btn-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span className="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div className="dropdown-menu">
-                                <a className="dropdown-item" href="#">Action</a>
-                                <a className="dropdown-item" href="#">Another action</a>
-                                <a className="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                        <div className="btn-group">
-                            <button type="button" className="btn btn-dark">Un texto mas largo pa ver que pasa</button>
-                            <button type="button" className="btn btn-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span className="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div className="dropdown-menu">
-                                <a className="dropdown-item" href="#">Action</a>
-                                <a className="dropdown-item" href="#">Another action</a>
-                                <a className="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                        <div className="btn-group">
-                            <button type="button" className="btn btn-dark">Un texto mas largo pa ver que pasa</button>
-                            <button type="button" className="btn btn-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span className="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div className="dropdown-menu">
-                                <a className="dropdown-item" href="#">Action</a>
-                                <a className="dropdown-item" href="#">Another action</a>
-                                <a className="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                        {/* <li className="nav-item active">
-                            <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Link</a>
+                            <div className="btn-group">
+                                <button type="button" className="btn btn-dark">Tramite para Turistas</button>
+                                <button type="button" className="btn btn-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span className="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div className="dropdown-menu">
+                                    <a className="dropdown-item" href="#">Action</a>
+                                    <a className="dropdown-item" href="#">Another action</a>
+                                    <a className="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </div>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Link</a>
+                            <div className="btn-group">
+                                <button type="button" className="btn btn-dark">Tramite de Nacionalización</button>
+                                <button type="button" className="btn btn-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span className="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div className="dropdown-menu">
+                                    <a className="dropdown-item" href="#">Action</a>
+                                    <a className="dropdown-item" href="#">Another action</a>
+                                    <a className="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </div>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Link</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Link</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Link</a>
+                            <a className="nav-link" href="/dashboard/todotramite">Todo Pruebas</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">Link</a>

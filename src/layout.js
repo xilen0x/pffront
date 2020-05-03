@@ -13,7 +13,13 @@ import QuienesSomos from './views/quienessomos';
 import Pricing from './views/pricing';
 import Blogs from './views/blogs';
 import BlogView from './views/blogview';
-import injectContext from './store/appContext'
+import AdminUpBlog from './views/dashviews/adminupblog';
+import AdminUpNew from './components/dashcompts/adminupnew';
+import injectContext from './store/appContext';
+import TodoCards from './components/dashcompts/todocards';
+import AdminHome from './views/dashviews/adminhome';
+import AdminUpTramit from './views/dashviews/todotramite';
+import ChangePass from './components/changePass'
 
 
 const Layout = props => {
@@ -22,6 +28,11 @@ const Layout = props => {
             <Navbar />
             <ModalLogin />
             <Switch>
+                <Route exact path="/dashboard/adminupnew" component={AdminUpNew} />
+                <Route exact path="/dashboard/adminupblog" component={AdminUpBlog} />
+                <Route exact path="/dashboard/adminuptramit" component={AdminUpTramit} />   
+                <Route exact path="/dashboard/adminhome" component={AdminHome} />
+                <Route exact path="/dashboard/:id" component={TodoCards} />       
                 <Route exact path="/blogs" component={Blogs} />
                 <Route exact path="/blogs/:blog" component={BlogView} />
                 <Route exact path="/pricing" component={Pricing} />
@@ -30,6 +41,7 @@ const Layout = props => {
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/update-profile" component={UpdateProfile} />
+                <Route exact path="/change-pass" component={ChangePass} />
                 <Route exact path="/" component={Home} />
                 <Route component={NotFound} />
             </Switch>
@@ -38,4 +50,4 @@ const Layout = props => {
      )
  }
 
- export default injectContext(Layout);
+ export default injectContext(Layout)

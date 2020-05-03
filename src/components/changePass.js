@@ -4,10 +4,19 @@ import { Context } from '../store/appContext';
 const ChangePass = props => {
     const { store, actions } = useContext(Context)
     useEffect(() => {
-        if (!store.isAuthenticated) props.history.push('/login');//en caso que el usuario ingrese a este componente y no esté logeado, lo redirecciono a login.
+       // if (!store.isAuthenticated) props.history.push('/login');//en caso que el usuario ingrese a este componente y no esté logeado, lo redirecciono a login.
     }, []);
     return (
         <>
+            {
+                !!store.errors && (
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="alert alert-warning" role="alert">{store.errors.msg} </div>
+                        </div>
+                    </div>
+                )
+            }
             <div className="fcontainer">
                 <br />
                 <div className="row justify-content-center">
