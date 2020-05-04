@@ -1,10 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import '../styles/modallogin.css'
 import { Context } from '../store/appContext';
 
 const ModalLogin = props => {
   const { store, actions } = useContext(Context);
+  const [state, setState] = useState({
+    showModal: false
+  }
+
+  )
   return (
     <>
       {
@@ -45,7 +50,7 @@ const ModalLogin = props => {
                 </div>
               </div>
               <div className="modal-footer">
-                <button type="submit" className="btn btn-primary btn-block">Entrar</button>
+                <button type="submit" onClick={()=> setState({showModal:false})} className="btn btn-primary btn-block">Entrar</button>
                 <button type="button" className="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>
               </div>
             </div>

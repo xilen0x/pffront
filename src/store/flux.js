@@ -19,7 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             tasks: null,
             blod: null,
             comentary: null,
-            temperatura: null,
+            temperatura: null
         },
         actions: {
             getBlogs: url => {
@@ -141,6 +141,17 @@ const getState = ({ getStore, getActions, setStore }) => {
                     [e.target.name]: e.target.files[0]
                 })
             },
+            setProfile: e => {
+                const store = getStore();
+                setStore({
+                    email: store.currentUser.user.email,
+                    nombre: store.currentUser.user.nombre,
+                    apellido: store.currentUser.user.apellido,
+                    rut: store.currentUser.user.rut,
+                    ciudad: store.currentUser.user.ciudad,
+                    pais: store.currentUser.user.pais
+                })
+            },
             isAuthenticated: () => {
                 if (sessionStorage.getItem('currentUser')) {
                     setStore({
@@ -228,11 +239,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                         }
                     })
             },
-            updateProfile: (e, history) => {
+            viewProfile: (e) => {
                 e.preventDefault();
                 const store = getStore();
 
-                fetch(store.path + '/update-profile/' + store.currentUser.user.id, {
+                fetch(store.path + '/view-profile/' + store.currentUser.user.id, {
                     method: 'GET',
                     body: JSON.stringify({
                         nombre: store.nombre,
@@ -275,15 +286,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const store = getStore();
                 const { access_token } = store.currentUser;
 
-                fetch(store.path + '/update-profile', {
-                    method: 'POST',
+                fetch(store.path + '/change-pass', {
+                    method: 'PUT',
                     body: JSON.stringify({
                         oldpassword: store.oldpassword,
                         password: store.password
                     }),
                     headers: {
                         'Content-Type': 'application/json', //estoy enviando en formato json
-                        'Authorization': 'Bearer ' + access_token
+                        'Authorization': 'Bearer ' + store.currentUser.access_token
                     }
                 })
                     .then(resp => resp.json())
@@ -304,6 +315,53 @@ const getState = ({ getStore, getActions, setStore }) => {
                                 password: '',
                                 errors: null
                             })
+                        }
+                    })
+            },
+            updateProfile: (e, history) => {
+                e.preventDefault();
+                const store = getStore();
+                const { access_token } = store.currentUser;
+
+                let formData = new FormData();
+                formData.append("nombre", store.nombre);
+                formData.append("apellido", store.apellido);
+                formData.append("email", store.email);
+                formData.append("rut", store.rut);
+                formData.append("ciudad", store.ciudad);
+                formData.append("pais", store.pais);
+
+                fetch(store.path + '/update-profile/' + store.currentUser.user.id, {
+                    method: 'PUT',
+                    body: formData,
+                    headers : {
+                        //'Content-Type': 'multipart/form-data',
+                        'Authorization': 'Bearer ' + store.currentUser.access_token
+                    }
+                })
+                    .then(resp => resp.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.msg) {
+                            setStore({
+                                errors: data
+                            })
+                        } else {   //una vez logeado, cambio el valor del store:
+                            let datos = Object.assign(store.currentUser, {user:data})
+                            setStore({
+                                currentUser: datos,
+                                isAuthenticated: true,
+                                nombre: '',
+                                apellido: '',
+                                email: '',
+                                rut: '',
+                                ciudad: '',
+                                pais: '',
+                                errors: null
+                            })
+                            sessionStorage.setItem('currentUser', JSON.stringify(datos))
+                            sessionStorage.setItem('isAuthenticated', true)
+                            history.push("/dashboard");
                         }
                     })
             },

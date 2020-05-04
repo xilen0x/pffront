@@ -4,7 +4,7 @@ import { Context } from '../store/appContext';
 const ChangePass = props => {
     const { store, actions } = useContext(Context)
     useEffect(() => {
-       // if (!store.isAuthenticated) props.history.push('/login');//en caso que el usuario ingrese a este componente y no esté logeado, lo redirecciono a login.
+        if (!store.isAuthenticated) props.history.push('/login');//en caso que el usuario ingrese a este componente y no esté logeado, lo redirecciono a login.
     }, []);
     return (
         <>
