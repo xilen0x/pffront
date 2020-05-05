@@ -41,10 +41,14 @@ const Navbar = props => {
                                 <>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Opciones  <i class="fas fa-cog"></i></Link>
+                                            Opciones                                      {
+                                                !!store.currentUser && (
+                                                    <img src={store.path + "/users/avatar/" + store.currentUser.user.avatar} className="rounded-circle" width="30" height="30"></img>
+                                                )
+                                            }</Link>
                                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <Link className="dropdown-item" to="/view-profile">Ver Perfil</Link>
-                                            <Link className="dropdown-item" to="/update-profile">Editar Perfil</Link>
+                                            <Link className="dropdown-item" to="/update-profile" onClick={actions.setProfile}>Editar Perfil</Link>
                                             <Link className="dropdown-item" to="/change-pass">Cambiar contraseña</Link>
                                             <Link className="dropdown-item" to="/" onClick={actions.logout}>Salir</Link>
                                         </div>

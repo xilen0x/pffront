@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from '../store/appContext';
+import { withRouter } from 'react-router-dom';
 import '../styles/login.css'
 
 
@@ -7,6 +8,15 @@ const Login = props => {
     const { store, actions } = useContext(Context);
     return (
         <>
+            {
+                !!store.errors && (
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="alert alert-warning" role="alert">{store.errors.msg} </div>
+                        </div>
+                    </div>
+                )
+            }
             <section className="our-webcoderskull padding-lg">
                 <div className="container">
                     <div className="row heading heading-icon">
@@ -40,4 +50,4 @@ const Login = props => {
     )
 }
 
-export default Login;
+export default withRouter(Login);

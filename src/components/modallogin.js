@@ -12,15 +12,6 @@ const ModalLogin = props => {
   )
   return (
     <>
-      {
-        !!store.errors && (
-          <div className="row">
-            <div className="col-md-12">
-              <div className="alert alert-warning" role="alert">{store.errors.msg} </div>
-            </div>
-          </div>
-        )
-      }
       <form onSubmit={e => actions.login(e, props.history)}>
         <div className="modal fade" id="ModalLogin" role="dialog" aria-labelledby="ModalLoginTitle" aria-hidden="true">
           <div className="modal-dialog modal-dialog-centered" role="document">

@@ -31,7 +31,7 @@ ul{
 	 margin-bottom:28px; 
 	 padding:40px 25px;
 }
-.our-webcoderskull .cnt-block:hover {
+.section .cnt-block:hover {
     box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
     border: 0;
 }
@@ -51,12 +51,7 @@ ul{
 	display:inline-block;
 }
 
-
-.our-webcoderskull{
-  background-color: #767676;
-  
-}
-.our-webcoderskull .cnt-block{ 
+.section .cnt-block{ 
    float:left; 
    width:100%; 
    background:#fff; 
@@ -65,50 +60,60 @@ ul{
    border:2px solid #d5d5d5;
    margin: 0 0 28px;
 }
-.our-webcoderskull .cnt-block figure{
+.section .cnt-block figure{
    width:148px; 
    height:148px; 
    border-radius:100%; 
    display:inline-block;
    margin-bottom: 15px;
 }
-.our-webcoderskull .cnt-block img{ 
+.section .cnt-block img{ 
    width:148px; 
    height:148px; 
    border-radius:100%; 
 }
-.our-webcoderskull .cnt-block h3{ 
+.section .cnt-block h3{ 
    color:#2a2a2a; 
    font-size:20px; 
    font-weight:500; 
    padding:6px 0;
    text-transform:uppercase;
 }
-.our-webcoderskull .cnt-block h3 a{
+.section .cnt-block h3 a{
   text-decoration:none;
 	color:#2a2a2a;
 }
-.our-webcoderskull .cnt-block h3 a:hover{
+.section .cnt-block h3 a:hover{
 	color:#337ab7;
 }
-.our-webcoderskull .cnt-block p{ 
+.section .cnt-block p{ 
    color:#2a2a2a; 
    font-size:13px; 
    line-height:20px; 
    font-weight:400;
 }
-.our-webcoderskull .cnt-block .follow-us{
+.section .cnt-block .follow-us{
 	margin:20px 0 0;
 }
-.our-webcoderskull .cnt-block .follow-us li{ 
+.section .cnt-block .follow-us li{ 
     display:inline-block; 
 	width:auto; 
 	margin:0 5px;
 }
-.our-webcoderskull .cnt-block .follow-us li .fa{ 
+.section .cnt-block .follow-us li .fa{ 
    font-size:24px; 
    color:#767676;
 }
-.our-webcoderskull .cnt-block .follow-us li .fa:hover{ 
+.section .cnt-block .follow-us li .fa:hover{ 
    color:#025a8e;
+}
+.banner{
+    background-color: darkslategray;
+    color: white;
+    font-size: large;
+    padding: 20px;
+    height: 100%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-bottom: 1%;
 }

@@ -1,5 +1,7 @@
 import React from 'react';
 import '../styles/pricing.css'
+import { Link } from 'react-router-dom';
+
 
 const Pricing = props => {
   return (
@@ -11,65 +13,36 @@ const Pricing = props => {
           </div>
           <div className="pricing card-deck flex-column flex-md-row mb-3">
             <div className="card card-pricing text-center px-3 mb-4">
-              <span className="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm">Starter</span>
+              <span className="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-danger text-white shadow-sm">Normal</span>
               <div className="bg-transparent card-header pt-4 border-0">
-                <h1 className="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="15">$<span className="price">3</span><span className="h6 text-muted ml-2">/ per month</span></h1>
+                <h1 className="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="15"><span className="price">Free</span><span className="h6 text-muted ml-2"></span></h1>
               </div>
               <div className="card-body pt-0">
                 <ul className="list-unstyled mb-4">
-                  <li>Up to 5 users</li>
-                  <li>Basic support on Github</li>
-                  <li>Monthly updates</li>
-                  <li>Free cancelation</li>
+                  <li>Accede a los artículos de interes</li>
+                  <li>Consulta los trámites que puedes realizar</li>
+                  <li>Guarda tu perfil</li>
                 </ul>
-                <button type="button" className="btn btn-outline-secondary mb-3">Order now</button>
+                <Link type="button" className="btn btn-outline-secondary mb-3" to="/">Comenzar</Link>
               </div>
             </div>
             <div className="card card-pricing popular shadow text-center px-3 mb-4">
-              <span className="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm">Professional</span>
+              <span className="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-danger text-white shadow-sm">Premium</span>
               <div className="bg-transparent card-header pt-4 border-0">
-                <h1 className="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="30">$<span className="price">6</span><span className="h6 text-muted ml-2">/ per month</span></h1>
+                <h1 className="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="30">$<span className="price">1000</span><span className="h6 text-muted ml-2">/ anual</span></h1>
               </div>
               <div className="card-body pt-0">
                 <ul className="list-unstyled mb-4">
-                  <li>Up to 5 users</li>
-                  <li>Basic support on Github</li>
-                  <li>Monthly updates</li>
-                  <li>Free cancelation</li>
+                  <li>Accede a los artículos de interes</li>
+                  <li>Consulta los trámites que puedes realizar</li>
+                  <li>Guarda tu perfil</li>
+                  <li>Accede a nuestros artículos con contenido Premium</li>
+                  <li>Guarda tus datos y documentos en nuestro portafolio para acceder a ellos cuando los necesites.</li>
                 </ul>
-                <a href="#" target="_blank" className="btn btn-primary mb-3">Order Now</a>
+                <Link type="button" className="btn btn-outline-secondary mb-3" to="/login">Registrarme</Link>
               </div>
             </div>
-            <div className="card card-pricing text-center px-3 mb-4">
-              <span className="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm">Business</span>
-              <div className="bg-transparent card-header pt-4 border-0">
-                <h1 className="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="45">$<span className="price">9</span><span className="h6 text-muted ml-2">/ per month</span></h1>
-              </div>
-              <div className="card-body pt-0">
-                <ul className="list-unstyled mb-4">
-                  <li>Up to 5 users</li>
-                  <li>Basic support on Github</li>
-                  <li>Monthly updates</li>
-                  <li>Free cancelation</li>
-                </ul>
-                <button type="button" className="btn btn-outline-secondary mb-3">Order now</button>
-              </div>
-            </div>
-            <div className="card card-pricing text-center px-3 mb-4">
-              <span className="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm">Enterprise</span>
-              <div className="bg-transparent card-header pt-4 border-0">
-                <h1 className="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="60">$<span className="price">12</span><span className="h6 text-muted ml-2">/ per month</span></h1>
-              </div>
-              <div className="card-body pt-0">
-                <ul className="list-unstyled mb-4">
-                  <li>Up to 5 users</li>
-                  <li>Basic support on Github</li>
-                  <li>Monthly updates</li>
-                  <li>Free cancelation</li>
-                </ul>
-                <button type="button" className="btn btn-outline-secondary mb-3">Order now</button>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>

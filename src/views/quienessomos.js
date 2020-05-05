@@ -4,7 +4,7 @@ import '../styles/quienessomos.css'
 const QuienesSomos = props => {
     return (
         <>
-            <section className="our-webcoderskull padding-lg">
+            <section className="section padding-lg">
                 <div className="container">
                     <div className="row heading heading-icon">
                         <h2>Nuestro Equipo</h2>
@@ -60,6 +60,12 @@ const QuienesSomos = props => {
                         </li>
                     </ul>
                 </div>
+            </section>
+            <section padding-lg>
+                <div class="banner"><p><strong>Bienvenido a NOMBRE!!!!:</strong> Somos un equipo que se encarga de centralizar toda la informacion de los tramites que puedes llegar a hacer para venir a Chile, asi como la de ayudarte en tu proceso para realizarlos!
+                Queremos ser tu compañia en tu visita al país y que te preocupes de lo mas importante... 
+                <br></br><h3>Disfrutar de tu viaje!!!</h3></p>
+            </div>
             </section>
         </>
     )

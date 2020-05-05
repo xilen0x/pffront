@@ -361,7 +361,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                             })
                             sessionStorage.setItem('currentUser', JSON.stringify(datos))
                             sessionStorage.setItem('isAuthenticated', true)
-                            history.push("/dashboard");
+                            history.push("/view-profile");
                         }
                     })
             },
