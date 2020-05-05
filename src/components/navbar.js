@@ -40,7 +40,7 @@ const Navbar = props => {
                                 <>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Opciones  <i class="fas fa-cog"></i></Link>
+                                            Opciones  <i className="fas fa-cog"></i></Link>
                                         <div className="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
                                             <Link className="dropdown-item" to="/update-profile">Mi Perfil</Link>
                                             <Link className="dropdown-item" to="/" onClick={actions.logout}>Salir</Link>

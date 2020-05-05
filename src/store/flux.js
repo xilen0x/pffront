@@ -15,12 +15,43 @@ const getState = ({ getStore, getActions, setStore }) => {
       avatar: null,
       errors: null,
       success: null,
-      tramits: null,
-      tasks: null,
-      blod: null,
+      tramites: null,        //Aqui estoy haciendo GET a toda la informacion en tabla tramites
+      tarea: null,          //Aqui estoy haciendo GET a toda la informacion en tabla tarea
+      titulo: '',           //Aqui estoy haciendo POST a la variable de nombre "titulo" de la tabla tasks
+      infointro: '',        //Aqui estoy haciendo POST a la variable de nombre "infointro" de la tabla tasks
+      infocorps: '',        //Aqui estoy haciendo POST a la variable de nombre "infocorps" de la tabla tasks
+      infofoot: '',         //Aqui estoy haciendo POST a la variable de nombre "infofoot" de la tabla tasks
+      task: '',
+      status: '',
+      // RETROCESO:  
+      // tramit: '',           //Aqui estoy haciendo POST a la variable de nombre "tramit" de la tabla tramits
+      // description: '',      //Aqui estoy haciendo POST a la variable de nombre "description" de la tabla tramits
+      // task01: '',           //Aqui estoy haciendo POST a la variable de nombre "task01" de la tabla tramits
+      // statust01: '',        //Aqui estoy haciendo POST a la variable de nombre "statust01" de la tabla tramits para cambio de estado
+      // task02: '',           //Aqui estoy haciendo POST a la variable de nombre "task02" de la tabla tramits
+      // statust02: '',        //Aqui estoy haciendo POST a la variable de nombre "statust02" de la tabla tramits para cambio de estado
+      // task03: '',           //Aqui estoy haciendo POST a la variable de nombre "task03" de la tabla tramits
+      // statust03: '',        //Aqui estoy haciendo POST a la variable de nombre "statust03" de la tabla tramits para cambio de estado
+      // task04: '',           //Aqui estoy haciendo POST a la variable de nombre "task04" de la tabla tramits
+      // statust04: '',        //Aqui estoy haciendo POST a la variable de nombre "statust04" de la tabla tramits para cambio de estado
+      // task05: '',           //Aqui estoy haciendo POST a la variable de nombre "task05" de la tabla tramits
+      // statust05: '',        //Aqui estoy haciendo POST a la variable de nombre "statust05" de la tabla tramits para cambio de estado
+      // task06: '',           //Aqui estoy haciendo POST a la variable de nombre "task06" de la tabla tramits
+      // statust06: '',        //Aqui estoy haciendo POST a la variable de nombre "statust06" de la tabla tramits para cambio de estado
+      // task07: '',           //Aqui estoy haciendo POST a la variable de nombre "task07" de la tabla tramits
+      // statust07: '',        //Aqui estoy haciendo POST a la variable de nombre "statust07" de la tabla tramits para cambio de estado
+      // task08: '',           //Aqui estoy haciendo POST a la variable de nombre "task08" de la tabla tramits
+      // statust08: '',        //Aqui estoy haciendo POST a la variable de nombre "statust08" de la tabla tramits para cambio de estado
+      // task09: '',           //Aqui estoy haciendo POST a la variable de nombre "task09" de la tabla tramits
+      // statust09: '',        //Aqui estoy haciendo POST a la variable de nombre "statust09" de la tabla tramits para cambio de estado
+      tramiteactual: null,
+      currentTask: null,
+      tareactual: null,
+      blog: null,
       comentary: null,
       temperatura: null,
     },
+
     actions: {
       getBlogs: url => {
         fetch(url, {
@@ -41,6 +72,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(error)
           })
       },
+
+
       getTemperatura: url => {
         fetch(url, {
           method: 'GET',
@@ -60,6 +93,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(error)
           })
       },
+
+
       getComentary: url => {
         fetch(url, {
           method: 'GET',
@@ -80,7 +115,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
       },
 
-      getTramits: url => {
+
+// AQUI COMIENZAN LOS METODOS DE TRAMITES
+
+      getTramites: url => {
         fetch(url, {
           method: 'GET',
           headers: {
@@ -90,7 +128,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then(resp => resp.json())
           .then(data => {
             setStore({
-              tramits: data
+              tramites: data,
             });
           })
           .catch(error => {
@@ -98,7 +136,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
       },
 
-      getTasks: url => {
+      getActualTramites: (url, index) => {
         fetch(url, {
           method: 'GET',
           headers: {
@@ -108,7 +146,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then(resp => resp.json())
           .then(data => {
             setStore({
-              tasks: data
+              tramites: data,
+              titulo: data[index].titulo,
+              infointro: data[index].infointro,
+              infocorps: data[index].infocorps,
+              infofoot: data[index].infofoot
             });
           })
           .catch(error => {
@@ -116,31 +158,236 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
       },
 
-      // addTramit: data => {
-      // 	const store = getStore();
-      // 	fetch( url, {
-      // 		method: "POST",
-      // 		body: JSON.stringify(data),
-      // 		headers: {
-      // 			"Content-Type": "application/json"
-      // 		}
-      // 	})
-      // 		.then(resp => resp.json())
-      // 		.then(data => {
-      // 			getActions().loadContactByAgenda();
-      // 		});
+      addTramit: (e, history) => {
+        e.preventDefault();
+        const store = getStore();
+
+        fetch(store.path + '/tramites', {
+          method: 'POST',
+          body: JSON.stringify({
+            titulo: store.titulo,
+            infointro: store.infointro,
+            infocorps: store.infocorps,
+            infofoot: store.infofoot
+          }),
+          headers: {
+            'Content-Type': 'application/json' //estoy enviando en formato json
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data)
+            if (data.msg) {
+              setStore({
+                errors: data
+              })
+            } else {
+              setStore({
+                titulo: '',
+                infointro: '',
+                infocorps: '',
+                infofoot: '',
+                errors: null
+              })
+              getActions().getTramites(store.path + '/tramites');
+              history.push("/dashboard");
+            }
+          })
+      },
+
+
+      setTramite: (url, index) => {
+        let store = getStore()
+        let newTramits = [...store.tramites]
+        let newURL = url + newTramits[index].id
+        newTramits[index] = {
+          titulo: store.titulo,
+          infointro: store.infointro,
+          infocorps: store.infocorps,
+          infofoot: store.infofoot
+        }
+        fetch(newURL, {
+          method: 'PUT',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(newTramits[index])
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
+
+
+      deleteTramite: (url, history) => {
+        const store = getStore();
+        fetch(store.path + "/tramites" + url, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            getActions().getTramites(store.path + '/tramites');
+          });
+      },
+
+
+// AQUI COMIENZAN LOS METODOS DE TAREAS      
+
+      // getTareas: url => {
+      //   fetch(url, {
+      //     method: 'GET',
+      //     headers: {
+      //       'content-type': 'application/json'
+      //     }
+      //   })
+      //     .then(resp => resp.json())
+      //     .then(data => {
+      //       setStore({
+      //         tareas: data,
+      //       });
+      //     })
+      //     .catch(error => {
+      //       console.log(error)
+      //     })
       // },
+
+
+      addTask: (e, history) => {
+        e.preventDefault();
+        const store = getStore();
+
+        fetch(`${store.path}/tareaintotramite/${store.currentTask}`, {
+          method: 'POST',
+          body: JSON.stringify({
+            task: store.task,
+            status: store.status
+          }),
+          headers: {
+            'Content-Type': 'application/json' //estoy enviando en formato json
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data)
+            if (data.msg) {
+              setStore({
+                errors: data
+              })
+            } else {
+              setStore({
+                task: '',
+                tramiteactual: '',
+                errors: null
+              })
+              getActions().getTramites(store.path + '/tareaintotramite');
+              history.push("/dashboard/adminuptask");
+            }
+          })
+      },
+
+
+      getActualTareas: (url, index) => {
+        fetch(url, {
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            setStore({
+              tramites: data,
+              task: data[index].task
+            });
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
+
+
+      setTarea: (url, index) => {
+        let store = getStore()
+        let newTask = [...store.tarea]
+        let newURL = url + newTask[index].id
+        newTask[index] = {
+          task: store.task
+        }
+        fetch(newURL, {
+          method: 'PUT',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(newTask[index])
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
+
+
+      deleteTareas: (url, history) => {
+        const store = getStore();
+        console.log(url)
+        fetch(store.path + "/tareas" + url, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            getActions().getTareas(store.path + '/tareas');
+          });
+      },
+
+
+      // AQUI COMIENZAN LOS METODOS DE TAREATRAMITE
+
+        // getTareaTramite: url => {
+        //   fetch(url, {
+        //     method: 'GET',
+        //     headers: {
+        //       'content-type': 'application/json'
+        //     }
+        //   })
+        //     .then(resp => resp.json())
+        //     .then(data => {
+        //       setStore({
+        //         tareas: data,
+        //       });
+        //     })
+        //     .catch(error => {
+        //       console.log(error)
+        //     })
+        // },
+
 
       handleChange: e => {
         setStore({
           [e.target.name]: e.target.value
         })
       },
+
+
       handleChangeFile: e => {
         setStore({
           [e.target.name]: e.target.files[0]
         })
       },
+
+
       isAuthenticated: () => {
         if (sessionStorage.getItem('currentUser')) {
           setStore({
@@ -149,6 +396,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
         }
       },
+
+
       login: (e, history) => {
         e.preventDefault();
         const store = getStore();
@@ -184,6 +433,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           })
       },
+
+
       register: (e, history) => {
         e.preventDefault();
         const store = getStore();
@@ -234,6 +485,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           })
       },
+
+
       updateProfile: (e, history) => {
         e.preventDefault();
         const store = getStore();
@@ -279,6 +532,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           })
       },
+
+
       changePassword: (e, history) => {
         e.preventDefault();
         const store = getStore();
@@ -316,6 +571,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             }
           })
       },
+
+
       logout: () => {
         setStore({
           currentUser: null,
@@ -326,10 +583,113 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
         sessionStorage.removeItem('currentUser');
         sessionStorage.removeItem('isAuthenticated');
+      },
+      
+
+      setCurrentTramite: (index) => {
+        setStore({
+          tramiteactual: index,
+        })
+      },
+
+      setCurrentTareas: (index) => {
+        setStore({
+          tareactual: index,
+        })
       }
+
     }
   }
 }
 
 
 export default getState;
+
+
+// addTask: (e, history) => {
+      //   e.preventDefault();
+      //   const store = getStore();
+
+      //   fetch(store.path + '/tareas', {
+      //     method: 'POST',
+      //     body: JSON.stringify({
+      //       titulo: store.titulo,
+      //       infointro: store.infointro,
+      //       infocorps: store.infocorps,
+      //       infofoot: store.infofoot
+      //     }),
+      //     headers: {
+      //       'Content-Type': 'application/json' //estoy enviando en formato json
+      //     }
+      //   })
+      //     .then(resp => resp.json())
+      //     .then(data => {
+      //       console.log(data)
+      //       if (data.msg) {
+      //         setStore({
+      //           errors: data
+      //         })
+      //       } else {   //una vez logeado, cambio el valor del store:
+      //         setStore({
+      //           titulo: '',
+      //           infointro: '',
+      //           infocorps: '',
+      //           infofoot: '',
+      //           errors: null
+      //         })
+      //         getActions().getTask(store.path + '/tareas');
+      //         history.push("/dashboard");
+      //       }
+      //     })
+      // },
+
+
+      // 
+
+
+      // addTramit: (e, history) => {
+      //   e.preventDefault();
+      //   const store = getStore();
+
+      //   fetch(store.path + '/tareas', {
+      //     method: 'POST',
+      //     body: JSON.stringify({
+      //       tramit: store.tramit,
+      //       description: store.description
+      //     }),
+      //     headers: {
+      //       'Content-Type': 'application/json' //estoy enviando en formato json
+      //     }
+      //   })
+      //     .then(resp => resp.json())
+      //     .then(data => {
+      //       console.log(data)
+      //       if (data.msg) {
+      //         setStore({
+      //           errors: data
+      //         })
+      //       } else {   //una vez logeado, cambio el valor del store:
+      //         setStore({
+      //           tramit: '',
+      //           description: '',
+      //           errors: null
+      //         })
+      //         history.push("/dashboard");
+      //       }
+      //     })
+      // },
+
+      // addTramit: data => {
+      // 	const store = getStore();
+      // 	fetch( url, {
+      // 		method: "POST",
+      // 		body: JSON.stringify(data),
+      // 		headers: {
+      // 			"Content-Type": "application/json"
+      // 		}
+      // 	})
+      // 		.then(resp => resp.json())
+      // 		.then(data => {
+      // 			getActions().loadContactByAgenda();
+      // 		});
+      // },
