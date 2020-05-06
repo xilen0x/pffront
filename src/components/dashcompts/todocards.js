@@ -22,44 +22,45 @@ const TodoCards = props => {
                             <div className="card-body overflow-auto">
                                 <div className="list-group">
                                     {
-                                        store.tramits != null ?
+                                        store.tramites != null ?
                                             (
-                                                store.tramits.map((tramit, i) => {
-                                                    if (JSON.stringify(tramit.tramit) === JSON.stringify(tram)) {
+                                                store.tramites.map((tramit, i) => {
+                                                    if (JSON.stringify(tramit.titulo) === JSON.stringify(tram)) {
                                                         return (
-                                                            < div className="dropdown">
-                                                                <button className="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    {tramit.tasks_details.task01}
-                                                                </button>
-                                                                <button className="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    {tramit.tasks_details.task02}
-                                                                </button>
-                                                                <button className="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    {tramit.tasks_details.task03}
-                                                                </button>
-                                                                <button className="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    {tramit.tasks_details.task04}
-                                                                </button>
-                                                                <button className="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    {tramit.tasks_details.task05}
-                                                                </button>
-                                                                <button className="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    {tramit.tasks_details.task06}
-                                                                </button>
-                                                                <button className="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    {tramit.tasks_details.task07}
-                                                                </button>
-                                                                <button className="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    {tramit.tasks_details.task08}
-                                                                </button>
-                                                                <button className="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    {tramit.tasks_details.task09}
-                                                                </button>
-                                                                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                                    <Link className="dropdown-item" to="#">Realizando</Link>
-                                                                    <Link className="dropdown-item" to="#">Realizada</Link>
-                                                                </div>
+                                                            <div className="dropdown" key={i}>
+                                                                {
+                                                                    tramit.tareas != null ?
+                                                                        (tramit.tareas.map((tasks, index) => {
+                                                                            return (
+                                                                                !!tasks.status == false ?
+                                                                                    (
+                                                                                        <>
+                                                                                            <button className="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" key={index}>
+                                                                                                {tasks.task}
+                                                                                            </button>
+                                                                                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                                                <Link className="dropdown-item" to="#">Realizando</Link>
+                                                                                                <Link className="dropdown-item" to="#">Realizada</Link>
+                                                                                            </div>
+                                                                                        </>
+                                                                                    ) : (
+                                                                                        <>
+
+                                                                                        </>
+                                                                                    )
+                                                                            )
+
+                                                                        }
+                                                                        )
+                                                                        ) : (
+                                                                            <div className="text-center" id="undefined">
+                                                                                <div className="spinner-grow text-light" role="status">
+                                                                                </div>
+                                                                            </div>
+                                                                        )
+                                                                }
                                                             </div>
+
                                                         )
                                                     }
                                                 })
@@ -78,28 +79,46 @@ const TodoCards = props => {
                             <div className="card-header">Tareas terminados!</div>
                             <div className="card-body overflow-auto">
                                 <div className="list-group">
-                                    <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
-                                    <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
-                                    <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
-                                    <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
-                                    <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
-                                    <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
-                                    <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
-                                    <Link to="#" className="list-group-item list-group-item-action list-group-item-success">...</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row">
-                    {
-                                        store.tramits != null ?
+                                {
+                                        store.tramites != null ?
                                             (
-                                                store.tramits.map((tramit, i) => {
-                                                    if (JSON.stringify(tramit.tramit) === JSON.stringify(tram)) {
+                                                store.tramites.map((tramit, i) => {
+                                                    if (JSON.stringify(tramit.titulo) === JSON.stringify(tram)) {
                                                         return (
-                                                            <div className="text-justify">
-                                                                {tramit.description}
+                                                            <div className="dropdown" key={i}>
+                                                                {
+                                                                    tramit.tareas != null ?
+                                                                        (tramit.tareas.map((tasks, index) => {
+                                                                            return (
+                                                                                !!tasks.status == true ?
+                                                                                    (
+                                                                                        <>
+                                                                                            <button className="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" key={index}>
+                                                                                                {tasks.task}
+                                                                                            </button>
+                                                                                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                                                <Link className="dropdown-item" to="#">Realizando</Link>
+                                                                                                <Link className="dropdown-item" to="#">Realizada</Link>
+                                                                                            </div>
+                                                                                        </>
+                                                                                    ) : (
+                                                                                        <>
+
+                                                                                        </>
+                                                                                    )
+                                                                            )
+
+                                                                        }
+                                                                        )
+                                                                        ) : (
+                                                                            <div className="text-center" id="undefined">
+                                                                                <div className="spinner-grow text-light" role="status">
+                                                                                </div>
+                                                                            </div>
+                                                                        )
+                                                                }
                                                             </div>
+
                                                         )
                                                     }
                                                 })
@@ -111,6 +130,31 @@ const TodoCards = props => {
                                                 </div>
                                             )
                                     }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        {
+                            store.tramits != null ?
+                                (
+                                    store.tramits.map((tramit, i) => {
+                                        if (JSON.stringify(tramit.tramit) === JSON.stringify(tram)) {
+                                            return (
+                                                <div className="text-justify">
+                                                    {tramit.description}
+                                                </div>
+                                            )
+                                        }
+                                    })
+                                )
+                                : (
+                                    <div className="text-center" id="undefined">
+                                        <div className="spinner-grow text-light" role="status">
+                                        </div>
+                                    </div>
+                                )
+                        }
                     </div>
                 </div>
             </div>

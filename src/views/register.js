@@ -20,15 +20,17 @@ const Register = props => {
                             </header>
                             <article className="card-body">
                                 <form onSubmit={e => actions.register(e, props.history)}>
+                                    <div className="row">
+                                        <div className="col-md-4 form-group">
+                                            <label htmlFor="avatar">Avatar</label>
+                                            <input type="file" className="form-control" id="avatar" name="avatar"
+                                                onChange={actions.handleChangeFile} />
+                                        </div>
+                                    </div>
                                     <div className="form-row">
                                         <div className="col-md-8 form-group">
                                             <label>Nombre </label>
                                             <input type="text" className="form-control" id="nombre" name="nombre" value={store.nombre} onChange={actions.handleChange} />
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="avatar">Avatar</label>
-                                            <input type="file" className="form-control" id="avatar" name="avatar" 
-                                            onChange={actions.handleChangeFile} />
                                         </div>
                                     </div>
                                     <div className="form-row">
@@ -40,7 +42,7 @@ const Register = props => {
                                     <div className="row">
                                         <div className="col-md-4 form-group">
                                             <label>Rut</label>
-                                            <input type="text" className="form-control" id="rut" name="rut" value={store.rut} onChange={actions.handleChange} placeholder="ej. 12345678" />
+                                            <input type="number" className="form-control" id="rut" name="rut" value={store.rut} onChange={actions.handleChange} placeholder="ej. 12345678" />
                                         </div>
                                     </div>
 

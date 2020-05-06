@@ -25,18 +25,19 @@ const VertNavbar = props => {
                                     <Link className="dropdown-item" to="/dashboard/adminupblog">Administración de Blogs</Link>
                                     <Link className="dropdown-item" to="/dashboard/adminupnew">Administración de Noticias</Link>
                                     <Link className="dropdown-item" to="/dashboard/adminuptramit">Administración de Trámites</Link>
+                                    <Link className="dropdown-item" to="/dashboard/adminuptask">Administración de Tareas</Link>
                                 </div>
                             </div>
                         </li>
                         {
-                            !!store.tramits ?
-                                store.tramits.map((tramit, i) => {
+                            !!store.tramites ?
+                                store.tramites.map((tramite, i) => {
                                     // if (JSON.stringify(tramit.tramit) === JSON.stringify(tram)) {
                                     return (
                                         <>
                                             <li className="nav-item">
                                                 <div className="btn-group">
-                                                    <button type="button" className="btn btn-dark"><Link className="text-white bg-dark" to={tramit.tramit}>{tramit.tramit}</Link></button>
+                                                    <button type="button" className="btn btn-dark"><Link className="text-white bg-dark" to={"dashboard/"+tramite.titulo}>{tramite.titulo}</Link></button>
                                                     <button type="button" className="btn btn-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <span className="sr-only">Toggle Dropdown</span>
                                                     </button>

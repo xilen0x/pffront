@@ -37,7 +37,8 @@ const Navbar = props => {
                         {
                             store.currentUser === null && (
                                 <>
-                                    <Link className="nav-item nav-link" to="#" data-toggle="modal" data-target="#ModalLogin">Entrar</Link>
+                                    {/* <Link className="nav-item nav-link" to="#" data-toggle="modal" data-target="#ModalLogin">Entrar</Link> */}
+                                    <Link className="nav-item nav-link" to="/login">Entrar</Link>
                                     <Link className="nav-item nav-link" to="/register">Registro</Link>
                                 </>
                             )
@@ -47,9 +48,15 @@ const Navbar = props => {
                                 <>
                                     <li className="nav-item dropdown">
                                         <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Opciones  <i class="fas fa-cog"></i></Link>
-                                        <div className="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                                            <Link className="dropdown-item" to="/update-profile">Mi Perfil</Link>
+                                            Opciones                                      {
+                                                !!store.currentUser && (
+                                                    <img src={store.path + "/users/avatar/" + store.currentUser.user.avatar} className="rounded-circle" width="30" height="30"></img>
+                                                )
+                                            }</Link>
+                                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <Link className="dropdown-item" to="/view-profile">Ver Perfil</Link>
+                                            <Link className="dropdown-item" to="/update-profile" onClick={actions.setProfile}>Editar Perfil</Link>
+                                            <Link className="dropdown-item" to="/change-pass">Cambiar contraseña</Link>
                                             <Link className="dropdown-item" to="/" onClick={actions.logout}>Salir</Link>
                                         </div>
                                     </li>

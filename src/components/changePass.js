@@ -8,6 +8,24 @@ const ChangePass = props => {
     }, []);
     return (
         <>
+            {
+                !!store.success && (
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="alert alert-success" role="alert">{store.success.success} </div>
+                        </div>
+                    </div>
+                )
+            }
+            {
+                !!store.errors && (
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="alert alert-warning" role="alert">{store.errors.msg} </div>
+                        </div>
+                    </div>
+                )
+            }
             <div className="fcontainer">
                 <br />
                 <div className="row justify-content-center">

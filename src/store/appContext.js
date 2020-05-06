@@ -23,8 +23,11 @@ const injectContext = PassedComponent => {
             this.state.actions.getBlogs('http://localhost:5000/blog');
             this.state.actions.getTemperatura('https://api.weatherapi.com/v1/forecast.json?key=54156a98efc540caac4202000202404&q=chile&days=3');
             this.state.actions.getComentary('http://localhost:5000/coment');
-            this.state.actions.getTramits('http://localhost:5000/tramits');
-            this.state.actions.getTasks('http://localhost:5000/tasks');
+            this.state.actions.getTramites('http://localhost:5000/tramites');
+            // this.state.actions.getTareas('http://localhost:5000/tramites');
+            // this.state.actions.setTramite('http://localhost:5000/tramits');
+            // this.state.actions.setTarea('http://localhost:5000/tareas');
+            // this.state.actions.getTasks('http://localhost:5000/tramits');
             this.state.actions.isAuthenticated();
         }
 
