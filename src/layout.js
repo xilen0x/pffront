@@ -22,7 +22,7 @@ import AdminUpNew from './views/dashviews/adminupnew';
 import AdminUpTramit from './views/dashviews/adminuptramite';
 import AdminUpTarea from './views/dashviews/adminuptarea';
 import ChangePass from './components/changePass';
-
+import Commits from './views/commits';
 
 
 const Layout = props => {
@@ -43,6 +43,7 @@ const Layout = props => {
                 <Route exact path="/pricing" component={Pricing} />
                 <Route exact path="/quienessomos" component={QuienesSomos} />
                 <Route exact path="/register" component={Register} />
+                <Route exact path="/commits" component={Commits} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/update-profile" component={UpdateProfile} />
                 <Route exact path="/view-profile" component={ViewProfile} />

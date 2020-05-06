@@ -14,72 +14,117 @@ const Tiempo = props => {
             </div>
 
             <div className="row col-12 mt-4  bg-dark border border-white justify-content-center">
+
                 <div className="seccion col-2 text-white mt-3">
                     {
-                        !!store.temperatura && (
+                        !!store.temperatura ? (
                             <h3>{store.temperatura.location.country}</h3>
-                        )
+                        ) : (
+                                <div class="spinner-border text-light" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            )
                     }
                 </div>
+
                 <div className="seccion col-3 text-white mt-3">
                     {
-                        !!store.temperatura && (
+                        !!store.temperatura ? (
                             <h3>{store.temperatura.location.name}</h3>
-                        )
+                        ) : (
+                                <div class="spinner-border text-light" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            )
                     }
                 </div>
+
                 <div className="seccion col-3 text-white mt-3">
                     {
-                        !!store.temperatura && (
+                        !!store.temperatura ? (
                             <h3>{store.temperatura.location.region}</h3>
-                        )
+                        ) : (
+                                <div class="spinner-border text-light" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            )
                     }
                 </div>
+
                 <div className="seccion col-3 text-white mt-3">
                     {
-                        !!store.temperatura && (
+                        !!store.temperatura ? (
                             <h3>{store.temperatura.location.localtime}</h3>
-                        )
+                        ) : (
+                                <div class="spinner-border text-light" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            )
                     }
                 </div>
+
+
+
             </div>
 
             <div className="row col-12  bg-dark border border-white justify-content-center">
                 <div className="seccion col-2">
                     {
-                        !!store.temperatura && (
+                        !!store.temperatura ? (
                             <div className="card bg-dark">
                                 <img src={store.temperatura.current.condition.icon} className="icono" id="ictemps" alt="..." />
                             </div>
-                        )
+                        ) : (
+                                <div className="col-md-12 text-center">
+                                    <div className="spinner-grow" role="status">
+                                        <span className="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            )
                     }
                 </div>
                 <div className="seccion col-2 text-white mt-3">
                     {
-                        !!store.temperatura && (
+                        !!store.temperatura ? (
                             <h3>{store.temperatura.current.condition.text} </h3>
-                        )
+                        ) : (
+                                <div class="spinner-border text-light" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            )
                     }
                 </div>
                 <div className="seccion col-2 text-white mt-3 ml-2">
                     {
-                        !!store.temperatura && (
+                        !!store.temperatura ? (
                             <h3>Temperature: {store.temperatura.current.temp_c}°C </h3>
-                        )
+                        ) : (
+                                <div class="spinner-border text-light" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            )
                     }
                 </div>
                 <div className="seccion col-2 text-white mt-3">
                     {
-                        !!store.temperatura && (
+                        !!store.temperatura ? (
                             <h3>Humidity: {store.temperatura.current.humidity}% </h3>
-                        )
+                        ) : (
+                                <div class="spinner-border text-light" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            )
                     }
                 </div>
                 <div className="seccion col-2 text-white mt-3">
                     {
-                        !!store.temperatura && (
+                        !!store.temperatura ? (
                             <h3>Wind dir: {store.temperatura.current.wind_dir} {store.temperatura.current.wind_kph}Kph</h3>
-                        )
+                        ) : (
+                                <div class="spinner-border text-light" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            )
                     }
                 </div>
 
@@ -91,7 +136,7 @@ const Tiempo = props => {
 
             <div className="row col-12  bg-dark text-white border border-white justify-content-center">
                 {
-                    !!store.temperatura && (
+                    !!store.temperatura ? (
                         store.temperatura.forecast.forecastday.map((dia, i) => {
                             return (
 
@@ -112,7 +157,11 @@ const Tiempo = props => {
 
                                 </div>
                             )
-                        }))
+                        })) : (
+                            <div class="spinner-border text-light" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        )
                 }
             </div>
 

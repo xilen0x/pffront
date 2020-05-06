@@ -81,7 +81,7 @@ const Home = props => {
             <h1 className= "title text-center">Home</h1>
             <Cards conte={state.blog} />
             <Coment conte={state.blog} />
-            <Tiempo conte={state.blog}/>
+            <Tiempo />
            
         </>
     )

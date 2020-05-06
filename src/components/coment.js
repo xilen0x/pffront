@@ -1,28 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { Context } from '../store/appContext';
 const Coment = props => {
-    const [multiplicador, setMultiplicador] = useState(1)
-    function mapcollage() {
-        let x = 3 * (multiplicador);
-        let y = [];
-        for (let i = 0; i < x; i++) {
-            if (props.conte[i] !== undefined)
-                y.push(
+    
+    const { store, actions } = useContext(Context)
+    const [state, setState] = useState({
+        var: [],
+    });
 
-                    <div className="mycard bg-transparent text-dark col-md-3 mt-4 ml-5 rounded-circle " key={i}>
-                        <img src="./imgen/avatar.jpg" className="card-img rounded-circle" alt="..." />
-                        <div className="card-img-overlay text-center font-weight-bolder col-md-9 mt-3 ml-5">
-                            <h5 className="card-title text-danger">Card title</h5>
-                            <p className="card-text ">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p className="card-text">{props.conte[i].title}</p>
-                        </div>
-                    </div>
-
-                )
-        }
-        return y;
-    }
     return (
         <>
             <div className="row title justify-content-center mt-4">
@@ -31,19 +16,38 @@ const Coment = props => {
             <div className="rowcomentuser justify-content-center bg-dark mt-4">
                 <div className="row justify-content-center">
                     {
-
-
-                        mapcollage()
+                        !!store.comentary ? (
+                             state.var=store.comentary.slice(0,3),
+                                state.var.map((comen, i) => {
+                                return (
+                                    <div className="mycard bg-transparent text-dark col-md-3 mt-4 ml-5 rounded-circle " key={i}>
+                                        <img src={"http://localhost:5000/static/images/avatars/" + comen.users.avatar} className="card-img rounded-circle" alt="..." />
+                                         
+                                        <div className="card-img-overlay text-center font-weight-bolder col-md-9 mt-3 ml-5">
+                                            <h5 className="card-title text-danger">{comen.users.nombre} {comen.users.apellido}</h5>
+                                            <p className="card-text ">{comen.c_cuerpo}</p>
+                                            <p className="card-text">{comen.c_fecha}</p>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                            )                                   
+                        ) : (
+                                <div class="spinner-border text-light" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            )
                     }
 
                 </div>
-                <div className="row d-flex justify-content-center">
-                    {
-                        props.conte.length > 3 * multiplicador ? (<div className="btn btn-outline-success font-weight-bold col-2" onClick={() => setMultiplicador(multiplicador + 1)}>More...</div>) : null
-                    }
-                </div>
+
             </div>
-           {/* <div className="rowcomentuser bg-dark mt-4">
+        </>
+    )
+
+}
+export default Coment;
+{/* <div className="rowcomentuser bg-dark mt-4">
                 <div className="row  justify-content-center">
 
                     <div className="form-row text-white mt-2">
@@ -74,12 +78,16 @@ const Coment = props => {
                 <div className="row justify-content-center">
                     <Link to="" className="btn btn-outline-success font-weight-bold col-2">Send</Link>
                 </div>
+                  
 
+
+                <div className="row d-flex justify-content-center">
+                    {
+                        store.comentary.length > 6 ? (<div className="btn btn-outline-success font-weight-bold col-2" >More...</div>) : null
+                    }
+                </div>
+                slice
                 </div>*/}
-        </>
-    )
-
-}
-export default Coment;
+        
 
 
