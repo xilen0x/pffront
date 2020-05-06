@@ -26,6 +26,13 @@ const Navbar = props => {
                                 </li>
                             )
                         }
+                        {
+                            store.currentUser !== null && (
+                                <li className="nav-item active">
+                                    <Link className="nav-item nav-link" to="/commits">Comenta</Link>
+                                </li>
+                            )
+                        }
                         <Link className="nav-item nav-link" to="pricing">Precios</Link>
                         {
                             store.currentUser === null && (

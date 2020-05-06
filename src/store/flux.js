@@ -2,6 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       path: 'http://localhost:5000',
+      urlblog: 'http://localhost:5000/blog',
+      urlimgblog: 'http://localhost:5000/static/images/blogs/',
       currentUser: null,
       isAuthenticated: false,
       email: '',
@@ -17,9 +19,15 @@ const getState = ({ getStore, getActions, setStore }) => {
       success: null,
       tramits: null,
       tasks: null,
-      blod: null,
+      blog: null,
+      e_titulo: "",
+      e_cuerpo: "",
+      e_cuerpopro: "",
+      e_imagen: "",
+      e_cuerpo: "",
       comentary: null,
       temperatura: null,
+      e_imagenact: null,
     },
     actions: {
       getBlogs: url => {
@@ -32,7 +40,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then(resp => resp.json())
           .then(data => {
-            console.log(data)
+            
             setStore({
               blog: data
             })
@@ -41,6 +49,114 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(error)
           })
       },
+      getblog: (url, index) => {
+
+        fetch(url, {
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data[index].e_imagen)
+            setStore({
+              blog: data,
+              e_titulo: data[index].e_titulo,
+              e_cuerpo: data[index].e_cuerpo,
+              e_cuerpopro: data[index].e_cuerpopro,
+              e_imagen: data[index].e_imagen,
+            });
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
+      updateblog: (url, history) => {
+        let store = getStore()
+        let formData = new FormData();
+        
+           
+        formData.append("e_titulo", store.e_titulo);
+        formData.append("e_cuerpo", store.e_cuerpo);
+        formData.append("e_cuerpopro", store.e_cuerpopro);
+        formData.append("e_imagen", store.e_imagen);
+        fetch(url, {
+          method: 'PUT',
+          body: formData
+
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            
+            if (data.msg) {
+              setStore({
+                errors: data
+              })
+            } else {
+              setStore({
+                e_titulo: "",
+                e_cuerpo: "",
+                e_cuerpopro: "",
+                e_imagen: null,
+                errors: null
+              })
+
+              getActions().getBlogs(store.urlblog);
+              history.push("/blogs");
+            }
+          })
+      },
+      setBlog: (e, history) => {
+        e.preventDefault();
+        const store = getStore();
+
+        let formData = new FormData();
+        formData.append("e_titulo", store.e_titulo);
+        formData.append("e_cuerpo", store.e_cuerpo);
+        formData.append("e_cuerpopro", store.e_cuerpopro);
+        formData.append("e_imagen", store.e_imagen);
+
+        fetch(store.path + '/blog', {
+          method: 'POST',
+          body: formData
+
+
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data)
+            if (data.msg) {
+              setStore({
+                errors: data
+              })
+            } else {
+              setStore({
+                e_titulo: "",
+                e_cuerpo: "",
+                e_cuerpopro: "",
+                e_imagen: null,
+                errors: null
+              })
+              getActions().getBlogs(store.urlblog);
+              history.push("/blogs");
+            }
+          })
+      },
+      deleteBlog: url => {
+        const store = getStore();
+        fetch(store.path + "/blog" + url, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            getActions().getBlogs(store.urlblog);
+          });
+      },
+
       getTemperatura: url => {
         fetch(url, {
           method: 'GET',
@@ -70,7 +186,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
           .then(resp => resp.json())
           .then(data => {
-            console.log(data)
+            
             setStore({
               comentary: data
             })
@@ -79,7 +195,38 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log(error)
           })
       },
+      setCommit: (e, history) => {
+        e.preventDefault();
+        const store = getStore();
 
+        fetch(store.path + '/coment', {
+          method: 'POST',
+          body: JSON.stringify({
+            c_cuerpo: store.c_cuerpo,
+            id_user: store.currentUser.user.id,
+          }),
+          headers: {
+            'Content-Type': 'application/json' //estoy enviando en formato json
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data)
+            if (data.msg) {
+              setStore({
+                errors: data
+              })
+            } else {
+              setStore({
+                c_cuerpo: '',
+                id_user: '',
+                errors: null
+              })
+              getActions().getComentary(store.path + '/coment');
+              history.push("/dashboard");
+            }
+          })
+      },
       getTramits: url => {
         fetch(url, {
           method: 'GET',
@@ -136,6 +283,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           [e.target.name]: e.target.value
         })
       },
+      // handleFile: e => {
+      //   const store= getStore();
+      //   console.log(store.e_imagen)
+      //   setStore({
+          
+      //     [e.target.name]: store.e_imagen
+      //   })
+
+      // },
       handleChangeFile: e => {
         setStore({
           [e.target.name]: e.target.files[0]
@@ -333,3 +489,113 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 export default getState;
+
+/*JSON.stringify({
+            e_titulo: store.e_titulo,
+            e_cuerpo: store.e_cuerpo,
+            e_cuerpopro: store.e_cuerpopro,
+            e_imagen: store.e_imagen,
+
+          }),*/
+
+/*  getTramite: (url, index) => {
+    console.log("Entreee!!!")
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        console.log("Entreee2!!!")
+        setStore({
+          tramits: data,
+          tramit: data[index].tramit,
+          description: data[index].description,
+          task01: data[index].task01,
+          task02: data[index].task02,
+          task03: data[index].task03,
+          task04: data[index].task04,
+          task05: data[index].task05,
+          task06: data[index].task06,
+          task07: data[index].task07,
+          task08: data[index].task08,
+          task09: data[index].task09
+        });
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  },
+
+  setTramite: (url, index) => {
+        let store = getStore()
+        let newTramits = [...store.tramits]
+        let newURL = url + newTramits[index].tr_id
+        newTramits[index] = {
+          tramit: store.tramit,
+          description: store.description,
+          task01: store.task01,
+          task02: store.task02,
+          task03: store.task03,
+          task04: store.task04,
+          task05: store.task05,
+          task06: store.task06,
+          task07: store.task07,
+          task08: store.task08,
+          task09: store.task09
+        }
+        fetch(newURL, {
+          method: 'PUT',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(newTramits[index])
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      },
+
+
+  setCommit: (e, history) => {
+        e.preventDefault();
+        const store = getStore();
+
+        fetch(store.path + '/coment', {
+          method: 'POST',
+          body: JSON.stringify({
+            e_cuerpo: store.e_cuerpo,
+            id_user: store.currentUser.user.id,
+          }),
+          headers: {
+            'Content-Type': 'application/json' //estoy enviando en formato json
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data)
+            if (data.msg) {
+              setStore({
+                errors: data
+              })
+            } else {
+              setStore({
+                e_cuerpo: '',
+                id_user: '',
+                errors: null
+              })
+              getActions().getComentary(store.path + '/coment');
+              history.push("/dashboard");
+            }
+          })
+      },
+
+
+      id_user
+      */

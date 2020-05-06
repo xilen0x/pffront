@@ -19,6 +19,7 @@ import injectContext from './store/appContext';
 import TodoCards from './components/dashcompts/todocards';
 import AdminHome from './views/dashviews/adminhome';
 import AdminUpTramit from './views/dashviews/todotramite';
+import Commits from './views/commits';
 
 
 
@@ -39,6 +40,7 @@ const Layout = props => {
                 <Route exact path="/quienessomos" component={QuienesSomos} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/register" component={Register} />
+                <Route exact path="/commits" component={Commits} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/update-profile" component={UpdateProfile} />
                 <Route exact path="/" component={Home} />
