@@ -53,6 +53,21 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
 
     actions: {
+      setProfile: e => {
+        const store = getStore();
+        setStore({
+          email: store.currentUser.user.email,
+          nombre: store.currentUser.user.nombre,
+          apellido: store.currentUser.user.apellido,
+          rut: store.currentUser.user.rut,
+          ciudad: store.currentUser.user.ciudad,
+          pais: store.currentUser.user.pais
+        })
+      },
+
+
+
+
       getBlogs: url => {
         fetch(url, {
           method: 'GET',
@@ -116,7 +131,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
 
-// AQUI COMIENZAN LOS METODOS DE TRAMITES
+      // AQUI COMIENZAN LOS METODOS DE TRAMITES
 
       getTramites: url => {
         fetch(url, {
@@ -238,7 +253,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
 
-// AQUI COMIENZAN LOS METODOS DE TAREAS      
+      // AQUI COMIENZAN LOS METODOS DE TAREAS      
 
       // getTareas: url => {
       //   fetch(url, {
@@ -355,23 +370,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       // AQUI COMIENZAN LOS METODOS DE TAREATRAMITE
 
-        // getTareaTramite: url => {
-        //   fetch(url, {
-        //     method: 'GET',
-        //     headers: {
-        //       'content-type': 'application/json'
-        //     }
-        //   })
-        //     .then(resp => resp.json())
-        //     .then(data => {
-        //       setStore({
-        //         tareas: data,
-        //       });
-        //     })
-        //     .catch(error => {
-        //       console.log(error)
-        //     })
-        // },
+      // getTareaTramite: url => {
+      //   fetch(url, {
+      //     method: 'GET',
+      //     headers: {
+      //       'content-type': 'application/json'
+      //     }
+      //   })
+      //     .then(resp => resp.json())
+      //     .then(data => {
+      //       setStore({
+      //         tareas: data,
+      //       });
+      //     })
+      //     .catch(error => {
+      //       console.log(error)
+      //     })
+      // },
 
 
       handleChange: e => {
@@ -440,24 +455,18 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
 
         let formData = new FormData();
+        formData.append("nombre", store.nombre);
+        formData.append("apellido", store.apellido);
         formData.append("email", store.email);
         formData.append("password", store.password);
+        formData.append("rut", store.rut);
+        formData.append("ciudad", store.ciudad);
+        formData.append("pais", store.pais);
         formData.append("avatar", store.avatar);
 
         fetch(store.path + '/register', {
           method: 'POST',
-          body: JSON.stringify({
-            nombre: store.nombre,
-            apellido: store.apellido,
-            email: store.email,
-            password: store.password,
-            rut: store.rut,
-            ciudad: store.ciudad,
-            pais: store.pais
-          }),
-          headers: {
-            'Content-Type': 'application/json' //estoy enviando en formato json
-          }
+          body: formData
         })
           .then(resp => resp.json())
           .then(data => {
@@ -486,13 +495,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           })
       },
 
-
-      updateProfile: (e, history) => {
+      viewProfile: (e) => {
         e.preventDefault();
         const store = getStore();
 
-        fetch(store.path + '/update-profile/' + store.currentUser.user.id, {
-          method: 'PUT',
+        fetch(store.path + '/view-profile/' + store.currentUser.user.id, {
+          method: 'GET',
           body: JSON.stringify({
             nombre: store.nombre,
             apellido: store.apellido,
@@ -526,9 +534,58 @@ const getState = ({ getStore, getActions, setStore }) => {
                 pais: '',
                 errors: null
               })
-              sessionStorage.setItem('currentUser', JSON.stringify(data))
+            }
+          })
+      },
+
+
+
+
+
+      updateProfile: (e, history) => {
+        e.preventDefault();
+        const store = getStore();
+        const { access_token } = store.currentUser;
+
+        let formData = new FormData();
+        formData.append("nombre", store.nombre);
+        formData.append("apellido", store.apellido);
+        formData.append("email", store.email);
+        formData.append("rut", store.rut);
+        formData.append("ciudad", store.ciudad);
+        formData.append("pais", store.pais);
+
+        fetch(store.path + '/update-profile/' + store.currentUser.user.id, {
+          method: 'PUT',
+          body: formData,
+          headers: {
+            //'Content-Type': 'multipart/form-data',
+            'Authorization': 'Bearer ' + store.currentUser.access_token
+          }
+        })
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data)
+            if (data.msg) {
+              setStore({
+                errors: data
+              })
+            } else {   //una vez logeado, cambio el valor del store:
+              let datos = Object.assign(store.currentUser, { user: data })
+              setStore({
+                currentUser: datos,
+                isAuthenticated: true,
+                nombre: '',
+                apellido: '',
+                email: '',
+                rut: '',
+                ciudad: '',
+                pais: '',
+                errors: null
+              })
+              sessionStorage.setItem('currentUser', JSON.stringify(datos))
               sessionStorage.setItem('isAuthenticated', true)
-              history.push("/dashboard");
+              history.push("/view-profile");
             }
           })
       },
@@ -539,15 +596,15 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         const { access_token } = store.currentUser;
 
-        fetch(store.path + '/update-profile', {
-          method: 'POST',
+        fetch(store.path + '/change-pass', {
+          method: 'PUT',
           body: JSON.stringify({
             oldpassword: store.oldpassword,
             password: store.password
           }),
           headers: {
             'Content-Type': 'application/json', //estoy enviando en formato json
-            'Authorization': 'Bearer ' + access_token
+            'Authorization': 'Bearer ' + store.currentUser.access_token
           }
         })
           .then(resp => resp.json())
@@ -583,24 +640,25 @@ const getState = ({ getStore, getActions, setStore }) => {
         })
         sessionStorage.removeItem('currentUser');
         sessionStorage.removeItem('isAuthenticated');
-      },
+      }
+    },
       
 
       setCurrentTramite: (index) => {
-        setStore({
-          tramiteactual: index,
-        })
-      },
+      setStore({
+        tramiteactual: index,
+      })
+    },
 
-      setCurrentTareas: (index) => {
-        setStore({
-          tareactual: index,
-        })
-      }
-
+    setCurrentTareas: (index) => {
+      setStore({
+        tareactual: index,
+      })
     }
+
   }
 }
+
 
 
 export default getState;

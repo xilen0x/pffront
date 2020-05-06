@@ -1,0 +1,13 @@
+.container {
+    width: 780px;
+    background: rgb(54, 54, 54);
+    color: white;
+    margin: 0 auto;
+    height: 100%; 
+}
+h2{
+    padding-top: 30px;
+}
+.container{
+    background-color:rgb(53, 53, 53) !important
+}

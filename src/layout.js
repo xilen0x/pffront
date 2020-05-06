@@ -8,6 +8,7 @@ import Register from './views/register';
 import ModalLogin from './components/modallogin';
 import Login from './components/login';
 import UpdateProfile from './views/update-profile'
+import ViewProfile from './views/view-profile'
 import Dashboard from './views/dashboard';
 import QuienesSomos from './views/quienessomos';
 import Pricing from './views/pricing';
@@ -20,6 +21,7 @@ import AdminHome from './views/dashviews/adminhome';
 import AdminUpNew from './views/dashviews/adminupnew';
 import AdminUpTramit from './views/dashviews/adminuptramite';
 import AdminUpTarea from './views/dashviews/adminuptarea';
+import ChangePass from './components/changePass';
 
 
 
@@ -43,6 +45,8 @@ const Layout = props => {
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/update-profile" component={UpdateProfile} />
+                <Route exact path="/view-profile" component={ViewProfile} />
+                <Route exact path="/change-pass" component={ChangePass} />
                 <Route exact path="/" component={Home} />
                 <Route component={NotFound} />
             </Switch>
