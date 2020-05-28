@@ -25,7 +25,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             getBlogs: url => {
                 fetch(url, {
                     method: 'GET',
-​
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -44,7 +43,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             getTemperatura: url => {
                 fetch(url, {
                     method: 'GET',
-​
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -63,7 +61,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             getComentary: url => {
                 fetch(url, {
                     method: 'GET',
-​
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -79,7 +76,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.log(error)
                     })
             },
-​
             getTramits: url => {
                 fetch(url, {
                     method: 'GET',
@@ -97,7 +93,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.log(error)
                     })
             },
-​
             getTasks: url => {
                 fetch(url, {
                     method: 'GET',
@@ -115,7 +110,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.log(error)
                     })
             },
-​
             // addTramit: data => {
             // 	const store = getStore();
             // 	fetch( url, {
@@ -130,7 +124,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             // 			getActions().loadContactByAgenda();
             // 		});
             // },
-​
             handleChange: e => {
                 setStore({
                     [e.target.name]: e.target.value
@@ -163,7 +156,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             login: (e, history) => {
                 e.preventDefault();
                 const store = getStore();
-​
                 fetch(store.path + '/login', {
                     method: 'POST',
                     body: JSON.stringify({
@@ -198,7 +190,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             register: (e, history) => {
                 e.preventDefault();
                 const store = getStore();
-​
                 let formData = new FormData();
                 formData.append("nombre", store.nombre);
                 formData.append("apellido", store.apellido);
@@ -208,7 +199,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 formData.append("ciudad", store.ciudad);
                 formData.append("pais", store.pais);
                 formData.append("avatar", store.avatar);
-​
                 fetch(store.path + '/register', {
                     method: 'POST',
                     body: formData
@@ -242,7 +232,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             viewProfile: (e) => {
                 e.preventDefault();
                 const store = getStore();
-​
                 fetch(store.path + '/view-profile/' + store.currentUser.user.id, {
                     method: 'GET',
                     body: JSON.stringify({
@@ -285,7 +274,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 e.preventDefault();
                 const store = getStore();
                 const { access_token } = store.currentUser;
-​
                 fetch(store.path + '/change-pass', {
                     method: 'PUT',
                     body: JSON.stringify({
@@ -322,7 +310,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 e.preventDefault();
                 const store = getStore();
                 const { access_token } = store.currentUser;
-​
                 let formData = new FormData();
                 formData.append("nombre", store.nombre);
                 formData.append("apellido", store.apellido);
@@ -330,7 +317,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 formData.append("rut", store.rut);
                 formData.append("ciudad", store.ciudad);
                 formData.append("pais", store.pais);
-​
                 fetch(store.path + '/update-profile/' + store.currentUser.user.id, {
                     method: 'PUT',
                     body: formData,
